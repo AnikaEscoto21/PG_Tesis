@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Views\ActosSalud\**" />
+    <Compile Remove="Views\DatosGenerales\**" />
+    <Content Remove="Views\ActosSalud\**" />
+    <Content Remove="Views\DatosGenerales\**" />
+    <EmbeddedResource Remove="Views\ActosSalud\**" />
+    <EmbeddedResource Remove="Views\DatosGenerales\**" />
+    <None Remove="Views\ActosSalud\**" />
+    <None Remove="Views\DatosGenerales\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+</Project>

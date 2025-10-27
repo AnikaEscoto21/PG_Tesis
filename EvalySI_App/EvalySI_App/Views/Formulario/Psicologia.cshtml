@@ -1,0 +1,180 @@
+﻿@model EvalySI_App.Models.Formulario.FormularioPoligrafoViewModel
+
+@{
+    ViewData["Title"] = "Paso 7: Datos Psicológicos";
+    Layout = "~/Views/Shared/Layout_Form.cshtml";
+}
+<!-- CSS personalizado y Bootstrap Icons -->
+<link rel="stylesheet" href="~/css/formulario.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+<div class="page-center">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10 col-xl-8">
+
+                <!-- Header mejorado -->
+                <div class="text-center mb-5">
+                    <h1 class="fw-bold mb-2">@ViewData["Title"]</h1>
+                    <p class="text-muted fs-5">Información sobre aspectos psicológicos, sociales y valores personales</p>
+                </div>
+
+                <form asp-controller="Formulario" asp-action="Psicologia" method="post">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <!-- Información Social -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-people-fill me-2"></i>Información Social</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label asp-for="InfoSocial.Religion">Religión</label>
+                                    <input asp-for="InfoSocial.Religion" class="form-control" placeholder="Ej: Católica, Evangélica, etc." />
+                                    <span asp-validation-for="InfoSocial.Religion" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="InfoSocial.FrecuenciaCulto">Frecuencia con que asiste al culto</label>
+                                    <input asp-for="InfoSocial.FrecuenciaCulto" class="form-control" placeholder="Ej: Semanal, Mensual, etc." />
+                                    <span asp-validation-for="InfoSocial.FrecuenciaCulto" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label asp-for="InfoSocial.Grupos">Grupos, clubes o asociaciones a las que pertenece</label>
+                                    <input asp-for="InfoSocial.Grupos" class="form-control" placeholder="Ej: Club deportivo, asociación profesional, etc." />
+                                    <span asp-validation-for="InfoSocial.Grupos" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label asp-for="InfoSocial.ActividadesTiempoLibre">Actividades que realiza en su tiempo libre</label>
+                                    <textarea asp-for="InfoSocial.ActividadesTiempoLibre" class="form-control" rows="2" placeholder="Describa sus hobbies y actividades recreativas"></textarea>
+                                    <span asp-validation-for="InfoSocial.ActividadesTiempoLibre" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label asp-for="InfoSocial.Autodescripcion">¿Cómo se describiría a sí mismo/a?</label>
+                                    <textarea asp-for="InfoSocial.Autodescripcion" class="form-control" rows="3" placeholder="Describa su personalidad, valores y características"></textarea>
+                                    <span asp-validation-for="InfoSocial.Autodescripcion" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="InfoSocial.Piercings">¿Tiene piercings? Especifique</label>
+                                    <input asp-for="InfoSocial.Piercings" class="form-control" placeholder="Ubicación y cantidad" />
+                                    <span asp-validation-for="InfoSocial.Piercings" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="form-label">¿Tiene tatuajes?</label>
+                                    <div class="form-check">
+                                        <input asp-for="InfoSocial.Tatuajes" type="radio" value="true" class="form-check-input" id="tatuajes_si" />
+                                        <label class="form-check-label" for="tatuajes_si">Sí</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input asp-for="InfoSocial.Tatuajes" type="radio" value="false" class="form-check-input" id="tatuajes_no" />
+                                        <label class="form-check-label" for="tatuajes_no">No</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label asp-for="InfoSocial.TatuajesDescripcion">Si tiene tatuajes, descríbalos (ubicación, diseño, significado)</label>
+                                    <textarea asp-for="InfoSocial.TatuajesDescripcion" class="form-control" rows="2" placeholder="Describa sus tatuajes si los tiene"></textarea>
+                                    <span asp-validation-for="InfoSocial.TatuajesDescripcion" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <!-- Aspectos Emocionales -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-heart-fill me-2"></i>Aspectos Emocionales</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <div class="form-check">
+                                        <input type="checkbox" asp-for="AspectosEmocionales.VivenPadres" class="form-check-input" />
+                                        <label class="form-check-label" asp-for="AspectosEmocionales.VivenPadres">¿Viven sus padres?</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="AspectosEmocionales.RelacionEntrePadres">¿Cómo es la relación entre ellos?</label>
+                                    <input asp-for="AspectosEmocionales.RelacionEntrePadres" class="form-control" />
+                                    <span asp-validation-for="AspectosEmocionales.RelacionEntrePadres" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="AspectosEmocionales.ConQuienVive">¿Usted con quién vive?</label>
+                                    <input asp-for="AspectosEmocionales.ConQuienVive" class="form-control" />
+                                    <span asp-validation-for="AspectosEmocionales.ConQuienVive" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="AspectosEmocionales.IntentosSuicidio">¿Ha tenido intentos de suicidio?</label>
+                                    <input asp-for="AspectosEmocionales.IntentosSuicidio" class="form-control" />
+                                    <span asp-validation-for="AspectosEmocionales.IntentosSuicidio" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="AspectosEmocionales.CualidadRespeta">¿Cuál es la cualidad que más respeta?</label>
+                                    <input asp-for="AspectosEmocionales.CualidadRespeta" class="form-control" />
+                                    <span asp-validation-for="AspectosEmocionales.CualidadRespeta" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="AspectosEmocionales.DefectoIntolerable">¿Cuál es el defecto que menos tolera?</label>
+                                    <input asp-for="AspectosEmocionales.DefectoIntolerable" class="form-control" />
+                                    <span asp-validation-for="AspectosEmocionales.DefectoIntolerable" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="AspectosEmocionales.MejorExperiencia">¿Cuál ha sido su mejor experiencia?</label>
+                                    <input asp-for="AspectosEmocionales.MejorExperiencia" class="form-control" />
+                                    <span asp-validation-for="AspectosEmocionales.MejorExperiencia" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label asp-for="AspectosEmocionales.PeorExperiencia">¿Cuál es su experiencia más desagradable?</label>
+                                    <textarea asp-for="AspectosEmocionales.PeorExperiencia" class="form-control" rows="2"></textarea>
+                                    <span asp-validation-for="AspectosEmocionales.PeorExperiencia" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <!-- Honestidad y Valores -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-shield-check-fill me-2"></i>Honestidad y Valores</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3"><label class="form-label">¿Ha sido totalmente honesto/a con su identidad en este proceso?</label><div class="form-check"><input asp-for="HonestidadValores.HonestaIdentidad" type="radio" value="true" class="form-check-input" id="honestaIdentidad_si" /><label class="form-check-label" for="honestaIdentidad_si">Sí</label></div><div class="form-check"><input asp-for="HonestidadValores.HonestaIdentidad" type="radio" value="false" class="form-check-input" id="honestaIdentidad_no" /><label class="form-check-label" for="honestaIdentidad_no">No</label></div></div>
+                                    <div class="form-group mb-3"><label class="form-label">¿Existe algún documento falso o alterado entregado en la plaza que solicita?</label><div class="form-check"><input asp-for="HonestidadValores.DocumentoFalsoEnPlaza" type="radio" value="true" class="form-check-input" id="documentoFalsoEnPlaza_si" /><label class="form-check-label" for="documentoFalsoEnPlaza_si">Sí</label></div><div class="form-check"><input asp-for="HonestidadValores.DocumentoFalsoEnPlaza" type="radio" value="false" class="form-check-input" id="documentoFalsoEnPlaza_no" /><label class="form-check-label" for="documentoFalsoEnPlaza_no">No</label></div></div>
+                                    <div class="form-group mb-3"><label class="form-label">¿Manejó valores en alguno de sus trabajos?</label><div class="form-check"><input asp-for="HonestidadValores.ManejoValores" type="radio" value="true" class="form-check-input" id="manejoValores_si" /><label class="form-check-label" for="manejoValores_si">Sí</label></div><div class="form-check"><input asp-for="HonestidadValores.ManejoValores" type="radio" value="false" class="form-check-input" id="manejoValores_no" /><label class="form-check-label" for="manejoValores_no">No</label></div></div>
+                                    <div class="form-group mb-3"><label class="form-label">¿Tuvo en alguna ocasión faltantes?</label><div class="form-check"><input asp-for="HonestidadValores.Faltantes" type="radio" value="true" class="form-check-input" id="faltantes_si" /><label class="form-check-label" for="faltantes_si">Sí</label></div><div class="form-check"><input asp-for="HonestidadValores.Faltantes" type="radio" value="false" class="form-check-input" id="faltantes_no" /><label class="form-check-label" for="faltantes_no">No</label></div></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3"><label class="form-label">¿Tuvo en alguna ocasión sobrantes?</label><div class="form-check"><input asp-for="HonestidadValores.Sobrantes" type="radio" value="true" class="form-check-input" id="sobrantes_si" /><label class="form-check-label" for="sobrantes_si">Sí</label></div><div class="form-check"><input asp-for="HonestidadValores.Sobrantes" type="radio" value="false" class="form-check-input" id="sobrantes_no" /><label class="form-check-label" for="sobrantes_no">No</label></div></div>
+                                    <div class="form-group mb-3"><label class="form-label">¿Realizó alguna vez préstamos con el dinero a su cargo?</label><div class="form-check"><input asp-for="HonestidadValores.PrestamosConDineroACargo" type="radio" value="true" class="form-check-input" id="prestamosConDineroACargo_si" /><label class="form-check-label" for="prestamosConDineroACargo_si">Sí</label></div><div class="form-check"><input asp-for="HonestidadValores.PrestamosConDineroACargo" type="radio" value="false" class="form-check-input" id="prestamosConDineroACargo_no" /><label class="form-check-label" for="prestamosConDineroACargo_no">No</label></div></div>
+                                    <div class="form-group mb-3"><label class="form-label">¿Ha manejado información confidencial en alguno de sus trabajos?</label><div class="form-check"><input asp-for="HonestidadValores.ManejoInfoConf" type="radio" value="true" class="form-check-input" id="manejoInfoConf_si" /><label class="form-check-label" for="manejoInfoConf_si">Sí</label></div><div class="form-check"><input asp-for="HonestidadValores.ManejoInfoConf" type="radio" value="false" class="form-check-input" id="manejoInfoConf_no" /><label class="form-check-label" for="manejoInfoConf_no">No</label></div></div>
+                                    <div class="form-group mb-3"><label class="form-label">¿Ha hecho en alguna ocasión mal uso de esa información confidencial?</label><div class="form-check"><input asp-for="HonestidadValores.UsoIndebidoInfoConf" type="radio" value="true" class="form-check-input" id="usoIndebidoInfoConf_si" /><label class="form-check-label" for="usoIndebidoInfoConf_si">Sí</label></div><div class="form-check"><input asp-for="HonestidadValores.UsoIndebidoInfoConf" type="radio" value="false" class="form-check-input" id="usoIndebidoInfoConf_no" /><label class="form-check-label" for="usoIndebidoInfoConf_no">No</label></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="form-group mt-4 d-flex justify-content-between">
+                        <a asp-action="Legal" class="btn btn-back">Anterior</a>
+                        <button type="submit" class="btn btn-primaryS">Siguiente</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

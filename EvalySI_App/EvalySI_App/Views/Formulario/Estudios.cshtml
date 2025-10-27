@@ -1,0 +1,201 @@
+@model EvalySI_App.Models.Formulario.FormularioPoligrafoViewModel
+
+@{
+    ViewData["Title"] = "Paso 2: Información Académica";
+    Layout = "~/Views/Shared/Layout_Form.cshtml";
+}
+<!-- CSS personalizado y Bootstrap Icons -->
+<link rel="stylesheet" href="~/css/formulario.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+<div class="page-center">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Ajusta el ancho deseado cambiando estas columnas -->
+            <div class="col-12 col-lg-10 col-xl-8">
+
+                <!-- Header mejorado -->
+                <div class="text-center mb-5">
+                    <h1 class="fw-bold mb-2">@ViewData["Title"]</h1>
+                    <p class="text-muted fs-5">Ingrese los estudios realizados, comenzando por el más reciente</p>
+                </div>
+
+                <form asp-controller="Formulario" asp-action="Estudios" method="post">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <!-- ESTUDIOS REALIZADOS -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-book-fill me-2"></i>Estudios Realizados</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="estudios-container">
+                                @if (Model.Estudios != null && Model.Estudios.Count > 0)
+                                {
+                                    for (int i = 0; i < Model.Estudios.Count; i++)
+                                    {
+                                        <div class="estudio-item border p-3 mb-3">
+                                            <input type="hidden" asp-for="Estudios[i].IdEstudio" />
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label asp-for="Estudios[i].NombreInstitucion"></label>
+                                                    <input asp-for="Estudios[i].NombreInstitucion" class="form-control" placeholder="Nombre del centro educativo" />
+                                                    <span asp-validation-for="Estudios[i].NombreInstitucion" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label asp-for="Estudios[i].EstudiosRealizados"></label>
+                                                    <input asp-for="Estudios[i].EstudiosRealizados" class="form-control" placeholder="Ej: Licenciatura en Ingeniería" />
+                                                    <span asp-validation-for="Estudios[i].EstudiosRealizados" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label asp-for="Estudios[i].Lugar"></label>
+                                                    <input asp-for="Estudios[i].Lugar" class="form-control" placeholder="Ciudad, Departamento" />
+                                                    <span asp-validation-for="Estudios[i].Lugar" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label asp-for="Estudios[i].UltimoGrado"></label>
+                                                    <input asp-for="Estudios[i].UltimoGrado" class="form-control" placeholder="Ej: Graduado, En curso, etc." />
+                                                    <span asp-validation-for="Estudios[i].UltimoGrado" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label asp-for="Estudios[i].FechaDesde"></label>
+                                                    <input asp-for="Estudios[i].FechaDesde" class="form-control" type="date" />
+                                                    <span asp-validation-for="Estudios[i].FechaDesde" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label asp-for="Estudios[i].FechaHasta"></label>
+                                                    <input asp-for="Estudios[i].FechaHasta" class="form-control" type="date" />
+                                                    <span asp-validation-for="Estudios[i].FechaHasta" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="text-end mt-2">
+                                                <button type="button" class="btn btn-danger btn-sm btn-remover">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <!-- Primer formulario vacío por defecto -->
+                                    <div class="estudio-item border p-3 mb-3">
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label>Nombre de la Institución</label>
+                                                <input type="text" name="Estudios[0].NombreInstitucion" class="form-control" placeholder="Nombre del centro educativo" />
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Estudios Realizados</label>
+                                                <input type="text" name="Estudios[0].EstudiosRealizados" class="form-control" placeholder="Ej: Licenciatura en Ingeniería" />
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Lugar</label>
+                                                <input type="text" name="Estudios[0].Lugar" class="form-control" placeholder="Ciudad, Departamento" />
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Último Grado</label>
+                                                <input type="text" name="Estudios[0].UltimoGrado" class="form-control" placeholder="Ej: Graduado, En curso, etc." />
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Fecha Desde</label>
+                                                <input type="date" name="Estudios[0].FechaDesde" class="form-control" />
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Fecha Hasta</label>
+                                                <input type="date" name="Estudios[0].FechaHasta" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                            <button type="button" id="btn-agregar-estudio" class="btn btn-secondary mb-3 mt-3">+ Agregar Estudio</button>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="form-group mt-4 d-flex justify-content-between">
+                        <a asp-action="DatosGenerales" class="btn btn-back">Anterior</a>
+                        <button type="submit" class="btn btn-primaryS">Siguiente</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Plantilla para un nuevo estudio (oculta) -->
+<div id="estudio-template" style="display:none;">
+    <div class="estudio-item border p-3 mb-3">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label>Nombre de la Institución</label>
+                <input type="text" name="Estudios[INDEX].NombreInstitucion" class="form-control" placeholder="Nombre del centro educativo" />
+            </div>
+            <div class="form-group col-md-6">
+                <label>Estudios Realizados</label>
+                <input type="text" name="Estudios[INDEX].EstudiosRealizados" class="form-control" placeholder="Ej: Licenciatura en Ingeniería" />
+            </div>
+            <div class="form-group col-md-6">
+                <label>Lugar</label>
+                <input type="text" name="Estudios[INDEX].Lugar" class="form-control" placeholder="Ciudad, Departamento" />
+            </div>
+            <div class="form-group col-md-6">
+                <label>Último Grado</label>
+                <input type="text" name="Estudios[INDEX].UltimoGrado" class="form-control" placeholder="Ej: Graduado, En curso, etc." />
+            </div>
+            <div class="form-group col-md-6">
+                <label>Fecha Desde</label>
+                <input type="date" name="Estudios[INDEX].FechaDesde" class="form-control" />
+            </div>
+            <div class="form-group col-md-6">
+                <label>Fecha Hasta</label>
+                <input type="date" name="Estudios[INDEX].FechaHasta" class="form-control" />
+            </div>
+        </div>
+        <div class="text-end mt-2">
+            <button type="button" class="btn btn-danger btn-sm btn-remover">Eliminar</button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            function reindexar(container) {
+                container.children('.estudio-item').each(function (i) {
+                    $(this).find('input, select, textarea').each(function () {
+                        if (this.name) {
+                            this.name = this.name.replace(/\[\d+\]/g, '[' + i + ']');
+                        }
+                        if (this.id) {
+                            this.id = this.id.replace(/_\d+_/g, '_' + i + '_');
+                        }
+                    });
+                });
+            }
+
+            $('#btn-agregar-estudio').on('click', function () {
+                var $container = $('#estudios-container');
+                var index = $container.children('.estudio-item').length;
+                var templateHtml = $('#estudio-template').html().replace(/INDEX/g, index);
+                $container.append(templateHtml);
+                reindexar($container);
+            });
+
+            $(document).on('click', '.btn-remover', function () {
+                var $container = $('#estudios-container');
+                $(this).closest('.estudio-item').remove();
+                reindexar($container);
+            });
+        });
+    </script>
+    
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

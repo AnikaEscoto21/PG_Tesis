@@ -1,0 +1,147 @@
+﻿@model EvalySI_App.Models.Formulario.FormularioPoligrafoViewModel
+
+@{
+    ViewData["Title"] = "Paso 8: Conclusiones";
+    Layout = "~/Views/Shared/Layout_Form.cshtml";
+}
+<!-- CSS personalizado y Bootstrap Icons -->
+<link rel="stylesheet" href="~/css/formulario.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+<div class="page-center">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10 col-xl-8">
+
+                <!-- Header mejorado -->
+                <div class="text-center mb-5">
+                    <h1 class="fw-bold mb-2">@ViewData["Title"]</h1>
+                    <p class="text-muted fs-5">Preguntas finales del proceso de evaluación poligráfica</p>
+                </div>
+
+                <form asp-controller="Formulario" asp-action="Conclusion" method="post">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <!-- Conclusiones Finales -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-clipboard-check-fill me-2"></i>Conclusiones Finales</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-6 mb-4">
+                                    <label class="form-label fw-bold">¿Hay alguna experiencia en su vida que lo haga chantajeable?</label>
+                                    <p class="text-muted small">Situaciones que podrían ser usadas en su contra para presionarlo o extorsionarlo.</p>
+                                    <div class="form-check">
+                                        <input asp-for="Conclusiones.ExperienciaChantajeable" type="radio" value="true" class="form-check-input" id="experienciaChantajeable_si" />
+                                        <label class="form-check-label" for="experienciaChantajeable_si">Sí</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input asp-for="Conclusiones.ExperienciaChantajeable" type="radio" value="false" class="form-check-input" id="experienciaChantajeable_no" />
+                                        <label class="form-check-label" for="experienciaChantajeable_no">No</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6 mb-4">
+                                    <label class="form-label fw-bold">¿Pensaba que le faltaban preguntas por hacer?</label>
+                                    <p class="text-muted small">¿Esperaba que le preguntaran sobre algo que no se mencionó?</p>
+                                    <div class="form-check">
+                                        <input asp-for="Conclusiones.PensabaPreguntasFaltantes" type="radio" value="true" class="form-check-input" id="pensabaPreguntasFaltantes_si" />
+                                        <label class="form-check-label" for="pensabaPreguntasFaltantes_si">Sí</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input asp-for="Conclusiones.PensabaPreguntasFaltantes" type="radio" value="false" class="form-check-input" id="pensabaPreguntasFaltantes_no" />
+                                        <label class="form-check-label" for="pensabaPreguntasFaltantes_no">No</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6 mb-4">
+                                    <label class="form-label fw-bold">¿Falseó u omitió información en este cuestionario?</label>
+                                    <p class="text-muted small">¿Proporcionó información falsa o dejó de mencionar algo importante?</p>
+                                    <div class="form-check">
+                                        <input asp-for="Conclusiones.FalseoOmisiones" type="radio" value="true" class="form-check-input" id="falseoOmisiones_si" />
+                                        <label class="form-check-label" for="falseoOmisiones_si">Sí</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input asp-for="Conclusiones.FalseoOmisiones" type="radio" value="false" class="form-check-input" id="falseoOmisiones_no" />
+                                        <label class="form-check-label" for="falseoOmisiones_no">No</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6 mb-4">
+                                    <label class="form-label fw-bold">¿Hay algo que le preocupe que pueda salir en esta evaluación?</label>
+                                    <p class="text-muted small">Información que le genera inquietud que pueda ser detectada.</p>
+                                    <div class="form-check">
+                                        <input asp-for="Conclusiones.AlgoQuePreocupe" type="radio" value="true" class="form-check-input" id="algoQuePreocupe_si" />
+                                        <label class="form-check-label" for="algoQuePreocupe_si">Sí</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input asp-for="Conclusiones.AlgoQuePreocupe" type="radio" value="false" class="form-check-input" id="algoQuePreocupe_no" />
+                                        <label class="form-check-label" for="algoQuePreocupe_no">No</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-12 mb-4">
+                                    <label class="form-label fw-bold">¿Hay algo más que desee agregar o aclarar?</label>
+                                    <p class="text-muted small">Última oportunidad para mencionar información relevante.</p>
+                                    <div class="form-check">
+                                        <input asp-for="Conclusiones.AlgoQueDecir" type="radio" value="true" class="form-check-input" id="algoQueDecir_si" />
+                                        <label class="form-check-label" for="algoQueDecir_si">Sí</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input asp-for="Conclusiones.AlgoQueDecir" type="radio" value="false" class="form-check-input" id="algoQueDecir_no" />
+                                        <label class="form-check-label" for="algoQueDecir_no">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Objetivos -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-bullseye me-2"></i>Objetivos Personales</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-12 mb-3">
+                                    <label asp-for="Conclusiones.ObjetivosCP">Escribir 2 objetivos a Corto Plazo</label>
+                                    <textarea asp-for="Conclusiones.ObjetivosCP" class="form-control" rows="3" placeholder="Ejemplo: Completar un curso, mejorar una habilidad..."></textarea>
+                                </div>
+                                <div class="form-group col-md-12 mb-3">
+                                    <label asp-for="Conclusiones.ObjetivosMP">Escribir 2 objetivos a Mediano Plazo</label>
+                                    <textarea asp-for="Conclusiones.ObjetivosMP" class="form-control" rows="3" placeholder="Ejemplo: Obtener una certificación, cambiar de posición..."></textarea>
+                                </div>
+                                <div class="form-group col-md-12 mb-3">
+                                    <label asp-for="Conclusiones.ObjetivosLP">Escribir 2 objetivos a Largo Plazo</label>
+                                    <textarea asp-for="Conclusiones.ObjetivosLP" class="form-control" rows="3" placeholder="Ejemplo: Alcanzar un puesto directivo, crear un negocio..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info mt-4" role="alert">
+                        <h5 class="alert-heading"><i class="bi bi-info-circle-fill me-2"></i>¡Importante!</h5>
+                        <p class="mb-0">Ha completado el cuestionario de evaluación poligráfica. Por favor, revise sus respuestas antes de enviar. La honestidad y precisión de la información proporcionada es fundamental para el proceso.</p>
+                    </div>
+
+                    <hr />
+
+                    <div class="form-group mt-4 d-flex justify-content-between">
+                        <a asp-action="Psicologia" class="btn btn-back">Anterior</a>
+                        <button type="submit" class="btn btn-success btn-lg"><i class="bi bi-check-circle-fill me-2"></i>Enviar Formulario</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

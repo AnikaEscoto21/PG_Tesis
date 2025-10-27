@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Formulario Enviado";
+    Layout = "~/Views/Shared/Layout_Form.cshtml";
+}
+
+<!-- CSS personalizado y Bootstrap Icons -->
+<link rel="stylesheet" href="~/css/formulario.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+<style>
+
+</style>
+
+<div class="page-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8 col-xl-6">
+                
+                <div class="card success-card success-animation text-center p-5">
+                    <div class="card-body">
+                        <!-- Icono de éxito -->
+                        <div class="mb-4">
+                            <i class="bi bi-check-circle-fill success-icon"></i>
+                        </div>
+
+                        <!-- Título -->
+                        <h1 class="display-4 fw-bold text-success mb-3">¡Formulario Enviado!</h1>
+                        
+                        <!-- Mensaje principal -->
+                        <p class="lead text-muted mb-4">
+                            Su formulario de evaluación poligráfica ha sido enviado correctamente.
+                        </p>
+
+                        <!-- Información adicional -->
+                        <div class="alert alert-success border-0 mb-4" role="alert">
+                            <i class="bi bi-info-circle-fill me-2"></i>
+                            <strong>Próximos pasos:</strong> Nuestro equipo revisará su información y nos pondremos en contacto con usted próximamente.
+                        </div>
+
+                        <!-- Detalles -->
+                        <div class="row text-start mb-4">
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-calendar-check text-success fs-4 me-3"></i>
+                                    <div>
+                                        <small class="text-muted d-block">Fecha de envío</small>
+                                        <strong>@DateTime.Now.ToString("dd/MM/yyyy HH:mm")</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-shield-check text-success fs-4 me-3"></i>
+                                    <div>
+                                        <small class="text-muted d-block">Estado</small>
+                                        <strong class="text-success">Recibido</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botón de acción -->
+                        <div class="mt-4">
+                            <a href="@Url.Action("DatosPersonales", "Formulario")" class="btn btn-success btn-lg px-5">
+                                <i class="bi bi-house-fill me-2"></i>Volver al Inicio
+                            </a>
+                        </div>
+
+                        <!-- Mensaje de agradecimiento -->
+                        <p class="text-muted mt-4 mb-0">
+                            <small>Gracias por completar el formulario. Si tiene alguna pregunta, no dude en contactarnos.</small>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

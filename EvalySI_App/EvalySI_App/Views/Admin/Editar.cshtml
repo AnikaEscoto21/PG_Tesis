@@ -1,0 +1,262 @@
+﻿@model EvalySI_App.Models.DatosGenerales.CandidatoViewModel
+
+@{
+    ViewData["Title"] = "Editar Candidato";
+}
+
+<div class="editar-container">
+    <div class="editar-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1><i class="bi bi-pencil-square"></i> Editar Candidato</h1>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Volver
+            </a>
+        </div>
+    </div>
+
+    <form asp-action="Editar" method="post">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.FechaRegistro)
+
+        <!-- Información Personal -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="bi bi-person-fill"></i> Información Personal</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Nombres" class="form-label fw-bold">Nombres *</label>
+                        <input asp-for="Nombres" class="form-control" />
+                        <span asp-validation-for="Nombres" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Apellidos" class="form-label fw-bold">Apellidos *</label>
+                        <input asp-for="Apellidos" class="form-control" />
+                        <span asp-validation-for="Apellidos" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Edad" class="form-label fw-bold">Edad *</label>
+                        <input asp-for="Edad" type="number" class="form-control" />
+                        <span asp-validation-for="Edad" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="DPI" class="form-label fw-bold">DPI *</label>
+                        <input asp-for="DPI" class="form-control" maxlength="13" />
+                        <span asp-validation-for="DPI" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="DPIExtendidoEn" class="form-label fw-bold">DPI Extendido en *</label>
+                        <input asp-for="DPIExtendidoEn" class="form-control" />
+                        <span asp-validation-for="DPIExtendidoEn" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="LugarNacimiento" class="form-label fw-bold">Lugar de Nacimiento</label>
+                        <input asp-for="LugarNacimiento" class="form-control" />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="FechaNacimiento" class="form-label fw-bold">Fecha de Nacimiento *</label>
+                        <input asp-for="FechaNacimiento" type="date" class="form-control" />
+                        <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label asp-for="Direccion" class="form-label fw-bold">Dirección *</label>
+                        <textarea asp-for="Direccion" class="form-control" rows="2"></textarea>
+                        <span asp-validation-for="Direccion" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Nacionalidad" class="form-label fw-bold">Nacionalidad *</label>
+                        <input asp-for="Nacionalidad" class="form-control" />
+                        <span asp-validation-for="Nacionalidad" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="EstadoCivil" class="form-label fw-bold">Estado Civil *</label>
+                        <select asp-for="EstadoCivil" class="form-select">
+                            <option value="">Seleccione...</option>
+                            <option value="Soltero/a">Soltero/a</option>
+                            <option value="Casado/a">Casado/a</option>
+                            <option value="Divorciado/a">Divorciado/a</option>
+                            <option value="Viudo/a">Viudo/a</option>
+                            <option value="Unión Libre">Unión Libre</option>
+                        </select>
+                        <span asp-validation-for="EstadoCivil" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="TipoSangre" class="form-label fw-bold">Tipo de Sangre *</label>
+                        <select asp-for="TipoSangre" class="form-select">
+                            <option value="">Seleccione...</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                        <span asp-validation-for="TipoSangre" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Información de Contacto -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="bi bi-telephone-fill"></i> Información de Contacto</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="TelefonoCasa" class="form-label fw-bold">Teléfono Casa</label>
+                        <input asp-for="TelefonoCasa" class="form-control" maxlength="8" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="TelefonoCelular" class="form-label fw-bold">Teléfono Celular *</label>
+                        <input asp-for="TelefonoCelular" class="form-control" maxlength="8" />
+                        <span asp-validation-for="TelefonoCelular" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Correo" class="form-label fw-bold">Correo Electrónico *</label>
+                        <input asp-for="Correo" type="email" class="form-control" />
+                        <span asp-validation-for="Correo" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="ContactoEmergencia" class="form-label fw-bold">Contacto de Emergencia *</label>
+                        <input asp-for="ContactoEmergencia" class="form-control" />
+                        <span asp-validation-for="ContactoEmergencia" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="TelefonoEmergencia" class="form-label fw-bold">Teléfono de Emergencia *</label>
+                        <input asp-for="TelefonoEmergencia" class="form-control" maxlength="8" />
+                        <span asp-validation-for="TelefonoEmergencia" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Información Laboral -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0"><i class="bi bi-briefcase-fill"></i> Información Laboral</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Profesion" class="form-label fw-bold">Profesión *</label>
+                        <input asp-for="Profesion" class="form-control" />
+                        <span asp-validation-for="Profesion" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="PlazaAplica" class="form-label fw-bold">Plaza a la que Aplica *</label>
+                        <input asp-for="PlazaAplica" class="form-control" />
+                        <span asp-validation-for="PlazaAplica" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Información Adicional -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-warning">
+                <h5 class="mb-0"><i class="bi bi-info-circle-fill"></i> Información Adicional</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Nit" class="form-label fw-bold">NIT</label>
+                        <input asp-for="Nit" class="form-control" maxlength="9" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="NumIGSS" class="form-label fw-bold">Número IGSS</label>
+                        <input asp-for="NumIGSS" class="form-control" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="DependientesEconomicos" class="form-label fw-bold">Dependientes Económicos</label>
+                        <input asp-for="DependientesEconomicos" class="form-control" />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="ExperienciasPoligraficas" class="form-label fw-bold">Experiencias Poligráficas</label>
+                        <input asp-for="ExperienciasPoligraficas" class="form-control" />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="ResultadoPoligrafoPrevio" class="form-label fw-bold">Resultado Polígrafo Previo</label>
+                        <input asp-for="ResultadoPoligrafoPrevio" class="form-control" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="PorcentajeIngles" class="form-label fw-bold">Porcentaje de Inglés</label>
+                        <input asp-for="PorcentajeIngles" type="number" class="form-control" min="0" max="100" />
+                    </div>
+                    <div class="col-md-8 mb-3">
+                        <label asp-for="UsuariosRedes" class="form-label fw-bold">Usuarios de Redes</label>
+                        <input asp-for="UsuariosRedes" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Información del Cónyuge -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0"><i class="bi bi-heart-fill"></i> Información del Cónyuge (Opcional)</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="ConyugeNombre" class="form-label fw-bold">Nombre</label>
+                        <input asp-for="ConyugeNombre" class="form-control" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label asp-for="ConyugeEdad" class="form-label fw-bold">Edad</label>
+                        <input asp-for="ConyugeEdad" type="number" class="form-control" />
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label asp-for="ConyugeDPI" class="form-label fw-bold">DPI</label>
+                        <input asp-for="ConyugeDPI" class="form-control" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="ConyugeCel" class="form-label fw-bold">Celular</label>
+                        <input asp-for="ConyugeCel" class="form-control" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="ConyugeEstadoCivil" class="form-label fw-bold">Estado Civil</label>
+                        <input asp-for="ConyugeEstadoCivil" class="form-control" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="ConyugeOcupacion" class="form-label fw-bold">Ocupación</label>
+                        <input asp-for="ConyugeOcupacion" class="form-control" />
+                    </div>
+                    <div class="col-md-8 mb-3">
+                        <label asp-for="ConyugeTrabajo" class="form-label fw-bold">Lugar de Trabajo</label>
+                        <input asp-for="ConyugeTrabajo" class="form-control" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="ConyugeTelTrabajo" class="form-label fw-bold">Teléfono Trabajo</label>
+                        <input asp-for="ConyugeTelTrabajo" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botones de Acción -->
+        <div class="d-flex justify-content-end gap-2 mb-4">
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-x-circle"></i> Cancelar
+            </a>
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-save"></i> Guardar Cambios
+            </button>
+        </div>
+    </form>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

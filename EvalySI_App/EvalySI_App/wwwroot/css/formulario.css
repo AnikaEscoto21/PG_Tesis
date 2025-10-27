@@ -1,0 +1,506 @@
+﻿/* Variables globales */
+:root {
+    --card-border: #253551;
+    --muted: #6c757d;
+    --primary: #0d6efd;
+    --primary-dark: #0a58ca;
+    --success: #198754;
+    --info: #0dcaf0;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+h1 {
+    color: black;
+    font-family: 'Book Antiqua';
+    font-weight: 600;
+}
+
+
+/* Fondo con imagen */
+body {
+    background-image: url('/images/fondo-formulario.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    min-height: 100vh;
+}
+
+/* Centrar vertical y horizontal toda la vista */
+.page-center {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+    width: 100%;
+}
+
+/* Estilos para cards con sombra */
+.card {
+    border: none;
+    border-radius: 16px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.95);
+    /*backdrop-filter: blur(10px);*/
+    overflow: hidden;
+}
+
+.card.shadow-sm {
+    box-shadow: var(--shadow-sm);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+
+.card-header {
+    border-radius: 16px 16px 0 0 !important;
+    padding: 1.25rem 1.75rem;
+    font-weight: 600;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Headers del formulario completo */
+/* DATOS GENERALES */
+    .card-header.bg-datos {
+        background: linear-gradient(135deg, #13214A 80%, #E5E0DA 100%) !important;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+
+/* Efecto de brillo en el header */
+/*.card-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}*/
+
+.card:hover .card-header::before {
+    left: 100%;
+}
+
+.card-header h5 {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 2rem;
+    background: white;
+}
+
+/* Estilos para wizard */
+.form-wizard {
+    max-width: 900px;
+}
+
+.wizard-header .step-badge {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    display: inline-grid;
+    place-items: center;
+    font-weight: 600;
+    border: 1px solid var(--card-border);
+    color: var(--muted);
+    background: #fff;
+}
+
+.wizard-header .step-badge.active {
+    background: #0d6efd;
+    border-color: #0d6efd;
+    color: #fff;
+}
+
+.wizard-header .separator {
+    opacity: 0.5;
+    padding: 0.75rem;
+}
+
+/* Estilos para items dinámicos (hermanos/hijos) */
+.hermano-item, .hijo-item {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 12px;
+    border: 2px solid #fdfdfd !important;
+    background: white;
+    position: relative;
+    overflow: hidden;
+}
+
+    .hermano-item::before, .hijo-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(180deg, #13214A 80%, #E5E0DA 100%);
+    }
+
+    .hermano-item:hover, .hijo-item:hover {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        transform: translateY(-4px);
+        border-color: #fdfdfd !important;
+        background: white;
+    }
+
+/* Mejorar inputs */
+.form-control, .form-select {
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #f8f9fa;
+    font-size: 0.95rem;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.15);
+    background: white;
+    transform: translateY(-1px);
+}
+
+.form-control:hover, .form-select:hover {
+    border-color: #c3cfe2;
+    background: white;
+}
+
+/* Labels más destacados */
+.form-label, label {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
+}
+
+/* Botones mejorados */
+.btn {
+    border-radius: 10px;
+    padding: 0.7rem 1.75rem;
+    font-weight: 600;
+
+    border: none;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+}
+
+.btn-primaryS {
+    background: #E5E0DA;
+    color: #253551;
+    box-shadow: 0 4px 15px rgba(229, 224, 218, 0.4);
+}
+
+.btn-secondary {
+    background: #253551;
+    color: white;
+    box-shadow: 0 4px 15px rgba(37, 53, 81, 0.4);
+}
+
+.btn-back {
+    background: #2B621A;
+    color: white;
+    box-shadow: 0 4px 15px rgba(37, 53, 81, 0.4);
+}
+
+.btn-lg {
+    padding: 0.9rem 2.25rem;
+    font-size: 1.1rem;
+}
+
+/* Animaciones suaves */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+.card {
+    animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-group {
+    animation: slideInLeft 0.5s ease;
+}
+
+/* Efecto de carga para inputs */
+.form-control:focus {
+    animation: pulse 0.3s ease;
+}
+
+/* Espacio debajo del título */
+.wizard-header h1 {
+    margin-bottom: 5rem;
+    padding-bottom: 5rem;
+}
+
+/* Espacio arriba del primer card */
+.form-wizard > .card-plain:first-of-type {
+    margin-top: 5rem;
+}
+
+/* Estilos para action bar */
+.action-bar {
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    padding: 0.75rem 0;
+    border-top: 1px solid var(--card-border);
+    border-color: #dc3545 !important;
+    }
+
+    .invalid-feedback {
+        font-size: .875rem;
+    }
+
+    .form-label.required::after {
+        content: " *";
+        color: #dc3545;
+        font-weight: 700;
+    }
+
+    .repeat-item {
+        border: 1px dashed var(--card-border);
+        border-radius: .5rem;
+        padding: .75rem;
+        background: #fcfcfd;
+    }
+
+    .action-bar {
+        position: sticky;
+        bottom: 0;
+        background: #fff;
+        padding: .75rem 0;
+        border-top: 1px solid var(--card-border);
+        display: flex;
+        justify-content: flex-end;
+    }
+    /* Validation */
+    input.input-validation-error,
+    select.input-validation-error,
+    textarea.input-validation-error {
+        border-color: #dc3545 !important;
+    }
+
+    .invalid-feedback {
+        font-size: .875rem;
+    }
+
+
+/*DISEÑO DE ALERTAS*/
+
+/*Alerta de error*/
+.error-animation {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-10px);
+    }
+
+    20%, 40%, 60%, 80% {
+        transform: translateX(10px);
+    }
+}
+
+.error-icon {
+    font-size: 120px;
+    color: #dc3545;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+.error-card {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(220, 53, 69, 0.15);
+}
+
+.btn-retry {
+    background: linear-gradient(135deg, #253551 0%, #253551 100%);
+    color: white;
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+    .btn-retry:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+/*Alerta de éxito*/
+.success-animation {
+    animation: scaleIn 0.5s ease-in-out;
+}
+
+@keyframes scaleIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.success-icon {
+    font-size: 120px;
+    color: #28a745;
+    animation: checkmark 0.8s ease-in-out 0.3s both;
+}
+
+@keyframes checkmark {
+    0% {
+        transform: scale(0) rotate(0deg);
+    }
+
+    50% {
+        transform: scale(1.2) rotate(180deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+.success-card {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #28a745;
+    animation: confetti-fall 3s linear infinite;
+}
+
+@keyframes confetti-fall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+
+/* ARREGLO PARA BOTONES ELIMINAR */
+.btn-remover, .btn-remover-condicion {
+    white-space: nowrap;
+    min-width: auto;
+    padding: 0.375rem 0.75rem;
+    writing-mode: horizontal-tb !important;
+    display: inline-block;
+    text-align: center;
+}
+
+/* Asegurar que la columna del botón no se deforme */
+.col-md-1.d-flex.align-items-end {
+    min-width: 100px;
+    flex: 0 0 auto;
+}
+
+/* Ajuste para item-group y condicion-item */
+.item-group, .condicion-item {
+    position: relative;
+}
+
+.item-group .row, .condicion-item .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+/* Asegurar que los botones no se estiren verticalmente */
+.btn-danger.btn-sm {
+    height: auto;
+    line-height: 1.5;
+}

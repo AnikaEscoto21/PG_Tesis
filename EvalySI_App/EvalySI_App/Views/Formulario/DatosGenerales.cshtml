@@ -1,0 +1,636 @@
+﻿@model EvalySI_App.Models.Formulario.FormularioPoligrafoViewModel
+
+@{
+    ViewData["Title"] = "Paso 1: Datos Generales";
+    Layout = "~/Views/Shared/Layout_Form.cshtml";
+}
+<!-- CSS personalizado y Bootstrap Icons -->
+<link rel="stylesheet" href="~/css/formulario.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+<div class="page-center">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Ajusta el ancho deseado cambiando estas columnas -->
+            <div class="col-12 col-lg-11 col-xl-10">
+
+                <!-- Header mejorado -->
+                <div class="text-center mb-5">
+                    <h1 class="fw-bold mb-2">@ViewData["Title"]</h1>
+                    <p class="text-muted fs-5">Complete la siguiente información con sus datos personales y familiares</p>
+                </div>
+
+                <form asp-controller="Formulario" asp-action="DatosGenerales" method="post">
+                    @Html.AntiForgeryToken()
+                    
+
+                    <!-- DATOS GENERALES DEL CANDIDATO -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-person-circle me-2"></i>Datos Generales del candidato</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label asp-for="Candidato.Nombres" class="control-label"></label>
+                                    <input asp-for="Candidato.Nombres" class="form-control" />
+                                    <span asp-validation-for="Candidato.Nombres" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="Candidato.Apellidos" class="control-label"></label>
+                                    <input asp-for="Candidato.Apellidos" class="form-control" />
+                                    <span asp-validation-for="Candidato.Apellidos" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label asp-for="Candidato.Edad" class="control-label"></label>
+                                    <input asp-for="Candidato.Edad" class="form-control" type="number" />
+                                    <span asp-validation-for="Candidato.Edad" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label asp-for="Candidato.FechaNacimiento" class="control-label"></label>
+                                    <input asp-for="Candidato.FechaNacimiento" class="form-control" type="date" />
+                                    <span asp-validation-for="Candidato.FechaNacimiento" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label asp-for="Candidato.LugarNacimiento" class="control-label"></label>
+                                    <input asp-for="Candidato.LugarNacimiento" class="form-control" placeholder="Ciudad, Departamento" />
+                                    <span asp-validation-for="Candidato.LugarNacimiento" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label asp-for="Candidato.DPI" class="control-label"></label>
+                                    <input asp-for="Candidato.DPI" class="form-control" maxlength="13" />
+                                    <span asp-validation-for="Candidato.DPI" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label asp-for="Candidato.DPIExtendidoEn" class="control-label"></label>
+                                    <input asp-for="Candidato.DPIExtendidoEn" class="form-control" placeholder="Lugar de extensión" />
+                                    <span asp-validation-for="Candidato.DPIExtendidoEn" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label asp-for="Candidato.Nit" class="control-label"></label>
+                                    <input asp-for="Candidato.Nit" class="form-control" />
+                                    <span asp-validation-for="Candidato.Nit" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label asp-for="Candidato.Direccion" class="control-label"></label>
+                                    <input asp-for="Candidato.Direccion" class="form-control" />
+                                    <span asp-validation-for="Candidato.Direccion" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label asp-for="Candidato.Nacionalidad" class="control-label"></label>
+                                    <input asp-for="Candidato.Nacionalidad" class="form-control" />
+                                    <span asp-validation-for="Candidato.Nacionalidad" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label asp-for="Candidato.TelefonoCasa" class="control-label"></label>
+                                    <input asp-for="Candidato.TelefonoCasa" class="form-control" />
+                                    <span asp-validation-for="Candidato.TelefonoCasa" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label asp-for="Candidato.TelefonoCelular" class="control-label"></label>
+                                    <input asp-for="Candidato.TelefonoCelular" class="form-control" />
+                                    <span asp-validation-for="Candidato.TelefonoCelular" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="Candidato.Correo" class="control-label"></label>
+                                    <input asp-for="Candidato.Correo" class="form-control" type="email" />
+                                    <span asp-validation-for="Candidato.Correo" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="Candidato.UsuariosRedes" class="control-label"></label>
+                                    <input asp-for="Candidato.UsuariosRedes" class="form-control" placeholder="Facebook, Instagram, etc." />
+                                    <span asp-validation-for="Candidato.UsuariosRedes" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label asp-for="Candidato.EstadoCivil" class="control-label"></label>
+                                    <select asp-for="Candidato.EstadoCivil" class="form-control">
+                                        <option value="">Seleccione...</option>
+                                        <option value="Soltero/a">Soltero/a</option>
+                                        <option value="Casado/a">Casado/a</option>
+                                        <option value="Unido/a">Unido/a</option>
+                                        <option value="Divorciado/a">Divorciado/a</option>
+                                        <option value="Viudo/a">Viudo/a</option>
+                                    </select>
+                                    <span asp-validation-for="Candidato.EstadoCivil" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label asp-for="Candidato.TipoSangre" class="control-label"></label>
+                                    <input asp-for="Candidato.TipoSangre" class="form-control" placeholder="Ej: O+, A-, etc." />
+                                    <span asp-validation-for="Candidato.TipoSangre" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label asp-for="Candidato.NumIGSS" class="control-label"></label>
+                                    <input asp-for="Candidato.NumIGSS" class="form-control" />
+                                    <span asp-validation-for="Candidato.NumIGSS" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="Candidato.Profesion" class="control-label"></label>
+                                    <input asp-for="Candidato.Profesion" class="form-control" />
+                                    <span asp-validation-for="Candidato.Profesion" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="Candidato.PlazaAplica" class="control-label"></label>
+                                    <input asp-for="Candidato.PlazaAplica" class="form-control" placeholder="Puesto al que aplica" />
+                                    <span asp-validation-for="Candidato.PlazaAplica" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label asp-for="Candidato.PorcentajeIngles" class="control-label"></label>
+                                    <input asp-for="Candidato.PorcentajeIngles" class="form-control" type="number" min="0" max="100" placeholder="0-100%" />
+                                    <span asp-validation-for="Candidato.PorcentajeIngles" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label asp-for="Candidato.DependientesEconomicos" class="control-label"></label>
+                                    <input asp-for="Candidato.DependientesEconomicos" class="form-control" placeholder="Número de dependientes" />
+                                    <span asp-validation-for="Candidato.DependientesEconomicos" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>¿Tiene experiencia con polígrafo?</label>
+                                    <select asp-for="Candidato.ExperienciasPoligraficas" class="form-control">
+                                        <option value="">Seleccione...</option>
+                                        <option value="Sí">Sí</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="Candidato.ResultadoPoligrafoPrevio" class="control-label"></label>
+                                    <input asp-for="Candidato.ResultadoPoligrafoPrevio" class="form-control" placeholder="Si aplica" />
+                                    <span asp-validation-for="Candidato.ResultadoPoligrafoPrevio" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="Candidato.ContactoEmergencia" class="control-label"></label>
+                                    <input asp-for="Candidato.ContactoEmergencia" class="form-control" />
+                                    <span asp-validation-for="Candidato.ContactoEmergencia" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="Candidato.TelefonoEmergencia" class="control-label"></label>
+                                    <input asp-for="Candidato.TelefonoEmergencia" class="form-control" />
+                                    <span asp-validation-for="Candidato.TelefonoEmergencia" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-people-fill me-2"></i>Datos del Cónyuge<small class="text-muted">(Si aplica)</small></h5>
+                        </div>
+                        <div class="card-body">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Candidato.ConyugeNombre" class="control-label"></label>
+                            <input asp-for="Candidato.ConyugeNombre" class="form-control" />
+                            <span asp-validation-for="Candidato.ConyugeNombre" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label asp-for="Candidato.ConyugeEdad" class="control-label"></label>
+                            <input asp-for="Candidato.ConyugeEdad" class="form-control" type="number" />
+                            <span asp-validation-for="Candidato.ConyugeEdad" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="Candidato.ConyugeEstadoCivil" class="control-label"></label>
+                            <select asp-for="Candidato.ConyugeEstadoCivil" class="form-control">
+                                <option value="">Seleccione...</option>
+                                <option value="Soltero/a">Soltero/a</option>
+                                <option value="Casado/a">Casado/a</option>
+                                <option value="Unido/a">Unido/a</option>
+                                <option value="Divorciado/a">Divorciado/a</option>
+                                <option value="Viudo/a">Viudo/a</option>
+                            </select>
+                            <span asp-validation-for="Candidato.ConyugeEstadoCivil" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="Candidato.ConyugeDPI" class="control-label"></label>
+                            <input asp-for="Candidato.ConyugeDPI" class="form-control" />
+                            <span asp-validation-for="Candidato.ConyugeDPI" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="Candidato.ConyugeCel" class="control-label"></label>
+                            <input asp-for="Candidato.ConyugeCel" class="form-control" />
+                            <span asp-validation-for="Candidato.ConyugeCel" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="Candidato.ConyugeOcupacion" class="control-label"></label>
+                            <input asp-for="Candidato.ConyugeOcupacion" class="form-control" />
+                            <span asp-validation-for="Candidato.ConyugeOcupacion" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label asp-for="Candidato.ConyugeTrabajo" class="control-label"></label>
+                            <input asp-for="Candidato.ConyugeTrabajo" class="form-control" placeholder="Lugar de trabajo" />
+                            <span asp-validation-for="Candidato.ConyugeTrabajo" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="Candidato.ConyugeTelTrabajo" class="control-label"></label>
+                            <input asp-for="Candidato.ConyugeTelTrabajo" class="form-control" />
+                            <span asp-validation-for="Candidato.ConyugeTelTrabajo" class="text-danger"></span>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <!-- DATOS DE LOS PADRES -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-people-fill me-2"></i>Datos de los Padres</h5>
+                        </div>
+                        <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="text-primary">Padre</h5>
+                            <div class="form-group">
+                                <label asp-for="Padres.NombrePadre" class="control-label"></label>
+                                <input asp-for="Padres.NombrePadre" class="form-control" />
+                                <span asp-validation-for="Padres.NombrePadre" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Padres.EdadPadre" class="control-label"></label>
+                                <input asp-for="Padres.EdadPadre" class="form-control" type="number" />
+                                <span asp-validation-for="Padres.EdadPadre" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Padres.DPIPadre" class="control-label"></label>
+                                <input asp-for="Padres.DPIPadre" class="form-control" />
+                                <span asp-validation-for="Padres.DPIPadre" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Padres.NumResidenciaP" class="control-label"></label>
+                                <input asp-for="Padres.NumResidenciaP" class="form-control" placeholder="Teléfono de residencia" />
+                                <span asp-validation-for="Padres.NumResidenciaP" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Padres.CelularP" class="control-label"></label>
+                                <input asp-for="Padres.CelularP" class="form-control" />
+                                <span asp-validation-for="Padres.CelularP" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label asp-for="Padres.EstadoCivilP" class="control-label"></label>
+                                <select asp-for="Padres.EstadoCivilP" class="form-control">
+                                    <option value="">Seleccione...</option>
+                                    <option value="Soltero/a">Soltero/a</option>
+                                    <option value="Casado/a">Casado/a</option>
+                                    <option value="Unido/a">Unido/a</option>
+                                    <option value="Divorciado/a">Divorciado/a</option>
+                                    <option value="Viudo/a">Viudo/a</option>
+                                </select>
+                                <span asp-validation-for="Padres.EstadoCivilP" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Padres.NacionalidadP" class="control-label"></label>
+                                <input asp-for="Padres.NacionalidadP" class="form-control" />
+                                <span asp-validation-for="Padres.NacionalidadP" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Padres.ProfesionP" class="control-label"></label>
+                                <input asp-for="Padres.ProfesionP" class="form-control" />
+                                <span asp-validation-for="Padres.ProfesionP" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Padres.LugarTrabajoP" class="control-label"></label>
+                                <input asp-for="Padres.LugarTrabajoP" class="form-control" />
+                                <span asp-validation-for="Padres.LugarTrabajoP" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h5 class="text-primary">Madre</h5>
+                            <div class="form-group">
+                                <label asp-for="Padres.NombreMadre" class="control-label"></label>
+                                <input asp-for="Padres.NombreMadre" class="form-control" />
+                                <span asp-validation-for="Padres.NombreMadre" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Padres.EdadMadre" class="control-label"></label>
+                                <input asp-for="Padres.EdadMadre" class="form-control" type="number" />
+                                <span asp-validation-for="Padres.EdadMadre" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Padres.DPIMadre" class="control-label"></label>
+                                <input asp-for="Padres.DPIMadre" class="form-control" />
+                                <span asp-validation-for="Padres.DPIMadre" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Padres.NumResidenciaM" class="control-label"></label>
+                                <input asp-for="Padres.NumResidenciaM" class="form-control" placeholder="Teléfono de residencia" />
+                                <span asp-validation-for="Padres.NumResidenciaM" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Padres.CelularM" class="control-label"></label>
+                                <input asp-for="Padres.CelularM" class="form-control" />
+                                <span asp-validation-for="Padres.CelularM" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label asp-for="Padres.EstadoCivilM" class="control-label"></label>
+                                <select asp-for="Padres.EstadoCivilM" class="form-control">
+                                    <option value="">Seleccione...</option>
+                                    <option value="Soltero/a">Soltero/a</option>
+                                    <option value="Casado/a">Casado/a</option>
+                                    <option value="Unido/a">Unido/a</option>
+                                    <option value="Divorciado/a">Divorciado/a</option>
+                                    <option value="Viudo/a">Viudo/a</option>
+                                </select>
+                                <span asp-validation-for="Padres.EstadoCivilM" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Padres.NacionalidadM" class="control-label"></label>
+                                <input asp-for="Padres.NacionalidadM" class="form-control" />
+                                <span asp-validation-for="Padres.NacionalidadM" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Padres.ProfesionM" class="control-label"></label>
+                                <input asp-for="Padres.ProfesionM" class="form-control" />
+                                <span asp-validation-for="Padres.ProfesionM" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Padres.LugarTrabajoM" class="control-label"></label>
+                                <input asp-for="Padres.LugarTrabajoM" class="form-control" />
+                                <span asp-validation-for="Padres.LugarTrabajoM" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <!-- HERMANOS -->
+                    <h5 class="mb-0"><i class="fa-solid fa-users-fill me-2"></i>Hermanos</h5>
+                    <div id="hermanos-container">
+                        @if (Model.Hermanos != null)
+                        {
+                            for (int i = 0; i < Model.Hermanos.Count; i++)
+                            {
+                                <div class="hermano-item border p-3 mb-3 mt-3">
+                                    <input type="hidden" asp-for="Hermanos[i].IdHermano" />
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="Hermanos[i].Nombre"></label>
+                                            <input asp-for="Hermanos[i].Nombre" class="form-control" />
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label asp-for="Hermanos[i].Edad"></label>
+                                            <input asp-for="Hermanos[i].Edad" class="form-control" type="number" />
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label asp-for="Hermanos[i].DPI"></label>
+                                            <input asp-for="Hermanos[i].DPI" class="form-control" />
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label asp-for="Hermanos[i].NoResidencia"></label>
+                                            <input asp-for="Hermanos[i].NoResidencia" class="form-control" placeholder="Teléfono" />
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label asp-for="Hermanos[i].Celular"></label>
+                                            <input asp-for="Hermanos[i].Celular" class="form-control" />
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label asp-for="Hermanos[i].EstadoCivil" class="control-label"></label>
+                                            <select asp-for="Hermanos[i].EstadoCivil" class="form-control">
+                                                <option value="">Seleccione...</option>
+                                                <option value="Soltero/a">Soltero/a</option>
+                                                <option value="Casado/a">Casado/a</option>
+                                                <option value="Unido/a">Unido/a</option>
+                                                <option value="Divorciado/a">Divorciado/a</option>
+                                                <option value="Viudo/a">Viudo/a</option>
+                                            </select>
+                                            <span asp-validation-for="Hermanos[i].EstadoCivil" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label asp-for="Hermanos[i].Nacionalidad"></label>
+                                            <input asp-for="Hermanos[i].Nacionalidad" class="form-control" />
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label asp-for="Hermanos[i].Profesion"></label>
+                                            <input asp-for="Hermanos[i].Profesion" class="form-control" />
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label asp-for="Hermanos[i].LugarTrabajo"></label>
+                                            <input asp-for="Hermanos[i].LugarTrabajo" class="form-control" />
+                                        </div>
+                                        <div class="form-group col-md-12 text-end">
+                                            <button type="button" class="btn btn-danger btn-sm btn-remover mt-3">Eliminar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <button type="button" id="btn-agregar-hermano" class="btn btn-secondary mt-3 mb-3">+ Agregar Hermano</button>
+
+                    <hr />
+
+                    <i class="fa-solid fa-children"></i>
+                    <!-- HIJOS -->
+                    <h5 class="mb-0"><i class="fa-solid fa-children"></i>Hijos</h5>
+                    <div id="hijos-container">
+                        @if (Model.Hijos != null)
+                        {
+                            for (int i = 0; i < Model.Hijos.Count; i++)
+                            {
+                                <div class="hijo-item border p-3 mb-3 mt-3">
+                                    <input type="hidden" asp-for="Hijos[i].Id" />
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="Hijos[i].NombreHijo"></label>
+                                            <input asp-for="Hijos[i].NombreHijo" class="form-control" />
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label asp-for="Hijos[i].EdadHijo"></label>
+                                            <input asp-for="Hijos[i].EdadHijo" class="form-control" type="number" />
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label asp-for="Hijos[i].Nacionalidad"></label>
+                                            <input asp-for="Hijos[i].Nacionalidad" class="form-control" />
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label asp-for="Hijos[i].Direccion"></label>
+                                            <input asp-for="Hijos[i].Direccion" class="form-control" />
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label asp-for="Hijos[i].EstadoCivilHijo" class="control-label"></label>
+                                            <select asp-for="Hijos[i].EstadoCivilHijo" class="form-control">
+                                                <option value="">Seleccione...</option>
+                                                <option value="Soltero/a">Soltero/a</option>
+                                                <option value="Casado/a">Casado/a</option>
+                                                <option value="Unido/a">Unido/a</option>
+                                                <option value="Divorciado/a">Divorciado/a</option>
+                                                <option value="Viudo/a">Viudo/a</option>
+                                            </select>
+                                            <span asp-validation-for="Hijos[i].EstadoCivilHijo" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="Hijos[i].Ocupacion"></label>
+                                            <input asp-for="Hijos[i].Ocupacion" class="form-control" />
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="Hijos[i].LugarTrabajo"></label>
+                                            <input asp-for="Hijos[i].LugarTrabajo" class="form-control" />
+                                        </div>
+                                        <div class="form-group col-md-12 text-end">
+                                            <button type="button" class="btn btn-danger btn-sm btn-remover mt-3">Eliminar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <button type="button" id="btn-agregar-hijo" class="btn btn-secondary mb-3 mt-3">+ Agregar Hijo</button>
+
+                    <hr />
+
+                    <div class="form-group mt-4 text-end">
+                        <button type="submit" class="btn btn-primaryS">Siguiente</button>
+                    </div>
+                </form>
+
+                <!-- Plantillas para agregar dinámicamente -->
+                <div id="hermano-template" style="display: none;">
+                    <div class="hermano-item border p-3 mb-3 mt-3" >
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Nombre</label>
+                                <input type="text" name="Hermanos[INDEX].Nombre" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Edad</label>
+                                <input type="number" name="Hermanos[INDEX].Edad" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>DPI</label>
+                                <input type="text" name="Hermanos[INDEX].DPI" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Teléfono Residencia</label>
+                                <input type="text" name="Hermanos[INDEX].NoResidencia" class="form-control" placeholder="Teléfono" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Celular</label>
+                                <input type="text" name="Hermanos[INDEX].Celular" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Estado Civil</label>
+                                <select name="Hermanos[INDEX].EstadoCivil" class="form-control">
+                                    <option value="">Seleccione...</option>
+                                    <option value="Soltero/a">Soltero/a</option>
+                                    <option value="Casado/a">Casado/a</option>
+                                    <option value="Unido/a">Unido/a</option>
+                                    <option value="Divorciado/a">Divorciado/a</option>
+                                    <option value="Viudo/a">Viudo/a</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Nacionalidad</label>
+                                <input type="text" name="Hermanos[INDEX].Nacionalidad" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Profesión</label>
+                                <input type="text" name="Hermanos[INDEX].Profesion" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Lugar de Trabajo</label>
+                                <input type="text" name="Hermanos[INDEX].LugarTrabajo" class="form-control" />
+                            </div>
+                            <br>
+                            <div class="form-group col-md-12 text-end">
+                                <button type="button" class="btn btn-danger btn-sm btn-remover mt-3">Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="hijo-template" style="display: none;">
+                    <div class="hijo-item border p-3 mb-3 mt-3">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Nombre</label>
+                                <input type="text" name="Hijos[INDEX].NombreHijo" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Edad</label>
+                                <input type="number" name="Hijos[INDEX].EdadHijo" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Nacionalidad</label>
+                                <input type="text" name="Hijos[INDEX].Nacionalidad" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Dirección</label>
+                                <input type="text" name="Hijos[INDEX].Direccion" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Estado Civil</label>
+                                <select name="Hijos[INDEX].EstadoCivilHijo" class="form-control">
+                                    <option value="">Seleccione...</option>
+                                    <option value="Soltero/a">Soltero/a</option>
+                                    <option value="Casado/a">Casado/a</option>
+                                    <option value="Unido/a">Unido/a</option>
+                                    <option value="Divorciado/a">Divorciado/a</option>
+                                    <option value="Viudo/a">Viudo/a</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Ocupación</label>
+                                <input type="text" name="Hijos[INDEX].Ocupacion" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Lugar de Trabajo</label>
+                                <input type="text" name="Hijos[INDEX].LugarTrabajo" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-12 text-end">
+                                <button type="button" class="btn btn-danger btn-sm btn-remover mt-3">Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div> 
+</div> 
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            function reindexar(container) {
+                container.children().each(function (i) {
+                    $(this).find('input, select, textarea').each(function () {
+                        if (this.name) {
+                            this.name = this.name.replace(/\[\d+\]/g, '[' + i + ']');
+                        }
+                        if (this.id) {
+                            this.id = this.id.replace(/_\d+_/g, '_' + i + '_');
+                        }
+                    });
+                });
+            }
+
+            function agregarItem(containerId, templateId) {
+                var $container = $('#' + containerId);
+                var index = $container.children().length;
+                var template = $('#' + templateId).html().replace(/INDEX/g, index);
+                $container.append(template);
+                reindexar($container);
+            }
+
+            $('#btn-agregar-hermano').click(function () {
+                agregarItem('hermanos-container', 'hermano-template');
+            });
+
+            $('#btn-agregar-hijo').click(function () {
+                agregarItem('hijos-container', 'hijo-template');
+            });
+
+            $(document).on('click', '.btn-remover', function () {
+                var $container = $(this).closest('[id$="-container"]');
+                $(this).closest('.border').remove();
+                reindexar($container);
+            });
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

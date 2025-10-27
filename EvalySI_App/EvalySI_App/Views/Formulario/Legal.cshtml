@@ -1,0 +1,349 @@
+﻿@model EvalySI_App.Models.Formulario.FormularioPoligrafoViewModel
+
+@{
+    ViewData["Title"] = "Paso 6: Datos Legales";
+    Layout = "~/Views/Shared/Layout_Form.cshtml";
+}
+<!-- CSS personalizado y Bootstrap Icons -->
+<link rel="stylesheet" href="~/css/formulario.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+<div class="page-center">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10 col-xl-8">
+
+                <!-- Header mejorado -->
+                <div class="text-center mb-5">
+                    <h1 class="fw-bold mb-2">@ViewData["Title"]</h1>
+                    <p class="text-muted fs-5">Información sobre antecedentes legales y actividades delictivas</p>
+                </div>
+
+                <form asp-controller="Formulario" asp-action="Legal" method="post">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <!-- Actividades Delictivas -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-exclamation-triangle-fill me-2"></i>Actividades Delictivas</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha estado asociado con delincuentes o ha sido miembro de grupos delictivos de cualquier tipo?</label>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.AsociadoConDelincuentes" type="radio" value="true" class="form-check-input" id="asociadoConDelincuentes_si" />
+                                            <label class="form-check-label" for="asociadoConDelincuentes_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.AsociadoConDelincuentes" type="radio" value="false" class="form-check-input" id="asociadoConDelincuentes_no" />
+                                            <label class="form-check-label" for="asociadoConDelincuentes_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Conoce delincuentes o grupo delictivos de cualquier tipo?</label>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.ConoceDelincuentes" type="radio" value="true" class="form-check-input" id="conoceDelincuentes_si" />
+                                            <label class="form-check-label" for="conoceDelincuentes_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.ConoceDelincuentes" type="radio" value="false" class="form-check-input" id="conoceDelincuentes_no" />
+                                            <label class="form-check-label" for="conoceDelincuentes_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha sido detenido o cuestionado por la policía por cualquier motivo?</label>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.DetenidoCuestionado" type="radio" value="true" class="form-check-input" id="detenidoCuestionado_si" />
+                                            <label class="form-check-label" for="detenidoCuestionado_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.DetenidoCuestionado" type="radio" value="false" class="form-check-input" id="detenidoCuestionado_no" />
+                                            <label class="form-check-label" for="detenidoCuestionado_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha estado detenido en estaciones, reclusorios, cárceles o penitenciarias?</label>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.EstuvoRecluso" type="radio" value="true" class="form-check-input" id="estuvoRecluso_si" />
+                                            <label class="form-check-label" for="estuvoRecluso_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.EstuvoRecluso" type="radio" value="false" class="form-check-input" id="estuvoRecluso_no" />
+                                            <label class="form-check-label" for="estuvoRecluso_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha hecho algo por lo que pudo haber sido detenido?</label>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.HizoAlgoDetenido" type="radio" value="true" class="form-check-input" id="hizoAlgoDetenido_si" />
+                                            <label class="form-check-label" for="hizoAlgoDetenido_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.HizoAlgoDetenido" type="radio" value="false" class="form-check-input" id="hizoAlgoDetenido_no" />
+                                            <label class="form-check-label" for="hizoAlgoDetenido_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Alguien de su familia ha estado detenido en estaciones, reclusorios, cárceles o penitenciarias?</label>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.FamiliarDetenido" type="radio" value="true" class="form-check-input" id="familiarDetenido_si" />
+                                            <label class="form-check-label" for="familiarDetenido_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.FamiliarDetenido" type="radio" value="false" class="form-check-input" id="familiarDetenido_no" />
+                                            <label class="form-check-label" for="familiarDetenido_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha tenido cargos por cualquier falta cometida?</label>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.CargosPorFaltas" type="radio" value="true" class="form-check-input" id="cargosPorFaltas_si" />
+                                            <label class="form-check-label" for="cargosPorFaltas_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.CargosPorFaltas" type="radio" value="false" class="form-check-input" id="cargosPorFaltas_no" />
+                                            <label class="form-check-label" for="cargosPorFaltas_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Tiene antecedentes penales y policiacos limpios?</label>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.PenalesPoliciacosLimpios" type="radio" value="true" class="form-check-input" id="penalesPoliciacosLimpios_si" />
+                                            <label class="form-check-label" for="penalesPoliciacosLimpios_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.PenalesPoliciacosLimpios" type="radio" value="false" class="form-check-input" id="penalesPoliciacosLimpios_no" />
+                                            <label class="form-check-label" for="penalesPoliciacosLimpios_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha ayudado a alguien a cometer un delito o acto vandálico?</label>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.AyudoCometerDelito" type="radio" value="true" class="form-check-input" id="ayudoCometerDelito_si" />
+                                            <label class="form-check-label" for="ayudoCometerDelito_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.AyudoCometerDelito" type="radio" value="false" class="form-check-input" id="ayudoCometerDelito_no" />
+                                            <label class="form-check-label" for="ayudoCometerDelito_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Le ha cambiado el precio a alguna mercadería para pagar un precio menor?</label>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.CambioPrecios" type="radio" value="true" class="form-check-input" id="cambioPrecios_si" />
+                                            <label class="form-check-label" for="cambioPrecios_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.CambioPrecios" type="radio" value="false" class="form-check-input" id="cambioPrecios_no" />
+                                            <label class="form-check-label" for="cambioPrecios_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha utilizado ilegalmente alguna tarjeta de crédito o bancaria?</label>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.UsoIlegalTarjeta" type="radio" value="true" class="form-check-input" id="usoIlegalTarjeta_si" />
+                                            <label class="form-check-label" for="usoIlegalTarjeta_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="ActividadesDelictivas.UsoIlegalTarjeta" type="radio" value="false" class="form-check-input" id="usoIlegalTarjeta_no" />
+                                            <label class="form-check-label" for="usoIlegalTarjeta_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha falsificado, alterado o comprado documentos oficiales?</label>
+                                        <div class="form-check"><input asp-for="ActividadesDelictivas.DocumentoFalsificado" type="radio" value="true" class="form-check-input" id="documentoFalsificado_si" /><label class="form-check-label" for="documentoFalsificado_si">Sí</label></div>
+                                        <div class="form-check"><input asp-for="ActividadesDelictivas.DocumentoFalsificado" type="radio" value="false" class="form-check-input" id="documentoFalsificado_no" /><label class="form-check-label" for="documentoFalsificado_no">No</label></div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha robado algun articulo u objeto con mala intención?</label>
+                                        <div class="form-check"><input asp-for="ActividadesDelictivas.RoboArticulo" type="radio" value="true" class="form-check-input" id="roboArticulo_si" /><label class="form-check-label" for="roboArticulo_si">Sí</label></div>
+                                        <div class="form-check"><input asp-for="ActividadesDelictivas.RoboArticulo" type="radio" value="false" class="form-check-input" id="roboArticulo_no" /><label class="form-check-label" for="roboArticulo_no">No</label></div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha comprado o vendido carros robados?</label>
+                                        <div class="form-check"><input asp-for="ActividadesDelictivas.CompraVentaAutosRobados" type="radio" value="true" class="form-check-input" id="compraVentaAutosRobados_si" /><label class="form-check-label" for="compraVentaAutosRobados_si">Sí</label></div>
+                                        <div class="form-check"><input asp-for="ActividadesDelictivas.CompraVentaAutosRobados" type="radio" value="false" class="form-check-input" id="compraVentaAutosRobados_no" /><label class="form-check-label" for="compraVentaAutosRobados_no">No</label></div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha participado en algún acto sexual ilegal?</label>
+                                        <div class="form-check"><input asp-for="ActividadesDelictivas.ActoSIlegal" type="radio" value="true" class="form-check-input" id="actoSIlegal_si" /><label class="form-check-label" for="actoSIlegal_si">Sí</label></div>
+                                        <div class="form-check"><input asp-for="ActividadesDelictivas.ActoSIlegal" type="radio" value="false" class="form-check-input" id="actoSIlegal_no" /><label class="form-check-label" for="actoSIlegal_no">No</label></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha acosado sexualmente a alguien?</label>
+                                        <div class="form-check"><input asp-for="ActividadesDelictivas.AcosoS" type="radio" value="true" class="form-check-input" id="acosoS_si" /><label class="form-check-label" for="acosoS_si">Sí</label></div>
+                                        <div class="form-check"><input asp-for="ActividadesDelictivas.AcosoS" type="radio" value="false" class="form-check-input" id="acosoS_no" /><label class="form-check-label" for="acosoS_no">No</label></div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha traficado con pornografía?</label>
+                                        <div class="form-check"><input asp-for="ActividadesDelictivas.PG" type="radio" value="true" class="form-check-input" id="pg_si" /><label class="form-check-label" for="pg_si">Sí</label></div>
+                                        <div class="form-check"><input asp-for="ActividadesDelictivas.PG" type="radio" value="false" class="form-check-input" id="pg_no" /><label class="form-check-label" for="pg_no">No</label></div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha recibido beneficios de la prostitución?</label>
+                                        <div class="form-check"><input asp-for="ActividadesDelictivas.BeneficiosPros" type="radio" value="true" class="form-check-input" id="beneficiosPros_si" /><label class="form-check-label" for="beneficiosPros_si">Sí</label></div>
+                                        <div class="form-check"><input asp-for="ActividadesDelictivas.BeneficiosPros" type="radio" value="false" class="form-check-input" id="beneficiosPros_no" /><label class="form-check-label" for="beneficiosPros_no">No</label></div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha estado involucrado en algún secuestro?</label>
+                                        <div class="form-check"><input asp-for="ActividadesDelictivas.Secuestro" type="radio" value="true" class="form-check-input" id="secuestro_si" /><label class="form-check-label" for="secuestro_si">Sí</label></div>
+                                        <div class="form-check"><input asp-for="ActividadesDelictivas.Secuestro" type="radio" value="false" class="form-check-input" id="secuestro_no" /><label class="form-check-label" for="secuestro_no">No</label></div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha participado en alguna actividad ilícita o inmoral que hasta el momento no haya comentado?</label>
+                                        <div class="form-check"><input asp-for="ActividadesDelictivas.OtraActividadIllicita" type="radio" value="true" class="form-check-input" id="otraActividadIllicita_si" /><label class="form-check-label" for="otraActividadIllicita_si">Sí</label></div>
+                                        <div class="form-check"><input asp-for="ActividadesDelictivas.OtraActividadIllicita" type="radio" value="false" class="form-check-input" id="otraActividadIllicita_no" /><label class="form-check-label" for="otraActividadIllicita_no">No</label></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Antecedentes penales-->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-file-earmark-text-fill me-2"></i>Antecedentes Penales</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha causado heridas graves que requieran hospitalización a otra persona?</label>
+                                        <div class="form-check">
+                                            <input asp-for="AntecedentesGenerales.CausoHeridasGraves" type="radio" value="true" class="form-check-input" id="causoHeridas_si" />
+                                            <label class="form-check-label" for="causoHeridas_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="AntecedentesGenerales.CausoHeridasGraves" type="radio" value="false" class="form-check-input" id="causoHeridas_no" />
+                                            <label class="form-check-label" for="causoHeridas_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha matado a alguien?</label>
+                                        <div class="form-check">
+                                            <input asp-for="AntecedentesGenerales.MatoAlguien" type="radio" value="true" class="form-check-input" id="matoAlguien_si" />
+                                            <label class="form-check-label" for="matoAlguien_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="AntecedentesGenerales.MatoAlguien" type="radio" value="false" class="form-check-input" id="matoAlguien_no" />
+                                            <label class="form-check-label" for="matoAlguien_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label asp-for="AntecedentesGenerales.UltimaRina">¿La última vez que tuvo un pleito o riña?</label>
+                                    <input asp-for="AntecedentesGenerales.UltimaRina" class="form-control" />
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label asp-for="AntecedentesGenerales.UltimaPerdidaControl">¿Cuándo fue la última vez que perdió el control de su conducta? ¿Por qué?</label>
+                                    <textarea asp-for="AntecedentesGenerales.UltimaPerdidaControl" class="form-control" rows="2"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Manejo de armas -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-shield-fill-exclamation me-2"></i>Manejo de Armas</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Tiene armas en su propiedad?</label>
+                                        <div class="form-check">
+                                            <input asp-for="ManejoArmas.TieneArmasPropias" type="radio" value="true" class="form-check-input" id="tieneArmas_si" />
+                                            <label class="form-check-label" for="tieneArmas_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="ManejoArmas.TieneArmasPropias" type="radio" value="false" class="form-check-input" id="tieneArmas_no" />
+                                            <label class="form-check-label" for="tieneArmas_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha portado arma alguna vez?</label>
+                                        <div class="form-check">
+                                            <input asp-for="ManejoArmas.HaPortadoArma" type="radio" value="true" class="form-check-input" id="haPortado_si" />
+                                            <label class="form-check-label" for="haPortado_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="ManejoArmas.HaPortadoArma" type="radio" value="false" class="form-check-input" id="haPortado_no" />
+                                            <label class="form-check-label" for="haPortado_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha tenido algún enfrentamiento en el que utilizara un arma?</label>
+                                        <div class="form-check">
+                                            <input asp-for="ManejoArmas.EnfrentamientoConArma" type="radio" value="true" class="form-check-input" id="enfrentamiento_si" />
+                                            <label class="form-check-label" for="enfrentamiento_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="ManejoArmas.EnfrentamientoConArma" type="radio" value="false" class="form-check-input" id="enfrentamiento_no" />
+                                            <label class="form-check-label" for="enfrentamiento_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha hecho algún disparo innecesario en enfrentamientos armados?</label>
+                                        <div class="form-check">
+                                            <input asp-for="ManejoArmas.DisparoInnecesario" type="radio" value="true" class="form-check-input" id="disparo_si" />
+                                            <label class="form-check-label" for="disparo_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="ManejoArmas.DisparoInnecesario" type="radio" value="false" class="form-check-input" id="disparo_no" />
+                                            <label class="form-check-label" for="disparo_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha hecho uso indebido de algún arma?</label>
+                                        <div class="form-check">
+                                            <input asp-for="ManejoArmas.UsoIndebidoArma" type="radio" value="true" class="form-check-input" id="usoIndebido_si" />
+                                            <label class="form-check-label" for="usoIndebido_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="ManejoArmas.UsoIndebidoArma" type="radio" value="false" class="form-check-input" id="usoIndebido_no" />
+                                            <label class="form-check-label" for="usoIndebido_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha vendido o comprado armas de forma ilegal?</label>
+                                        <div class="form-check">
+                                            <input asp-for="ManejoArmas.CompraVentaIlegalArmas" type="radio" value="true" class="form-check-input" id="compraVenta_si" />
+                                            <label class="form-check-label" for="compraVenta_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="ManejoArmas.CompraVentaIlegalArmas" type="radio" value="false" class="form-check-input" id="compraVenta_no" />
+                                            <label class="form-check-label" for="compraVenta_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-4 d-flex justify-content-between">
+                        <a asp-action="Salud" class="btn btn-back">Anterior</a>
+                        <button type="submit" class="btn btn-primaryS">Siguiente</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

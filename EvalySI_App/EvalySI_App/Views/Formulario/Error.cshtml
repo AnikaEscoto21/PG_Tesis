@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Error al Guardar";
+    Layout = "~/Views/Shared/Layout_Form.cshtml";
+}
+
+<!-- CSS personalizado y Bootstrap Icons -->
+<link rel="stylesheet" href="~/css/formulario.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+
+<div class="page-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8 col-xl-6">
+                
+                <div class="card error-card error-animation text-center p-5">
+                    <div class="card-body">
+                        <!-- Icono de error -->
+                        <div class="mb-4">
+                            <i class="bi bi-exclamation-circle-fill error-icon"></i>
+                        </div>
+
+                        <!-- Título -->
+                        <h1 class="display-5 fw-bold text-danger mb-3">¡Oops! Algo salió mal</h1>
+                        
+                        <!-- Mensaje principal -->
+                        <p class="lead text-muted mb-4">
+                            No se pudo guardar su formulario en este momento.
+                        </p>
+
+                        <!-- Información del error -->
+                        <div class="alert alert-danger border-0 mb-4" role="alert">
+                            <div class="d-flex align-items-start">
+                                <i class="bi bi-info-circle-fill me-3 mt-1"></i>
+                                <div class="text-start">
+                                    <strong class="d-block mb-2">Detalles del error:</strong>
+                                    <ul class="mb-0 ps-3">
+                                        <li>Su formulario no se ha enviado correctamente</li> 
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sugerencias -->
+                        <div class="bg-light rounded p-4 mb-4 text-start">
+                            <h5 class="text-dark mb-3"><i class="bi bi-lightbulb-fill text-warning me-2"></i>Sugerencias:</h5>
+                            <ul class="text-muted mb-0">
+                                <li class="mb-2">Verifique su conexión a internet</li>
+                                <li class="mb-2">Sus datos no se han perdido, puede intentar nuevamente en unos minutos</li>
+                                <li class="mb-2">Si el problema persiste, contactenos</li>
+                            </ul>
+                        </div>
+
+                        <!-- Botones de acción -->
+                        <div class="d-grid gap-3 d-md-flex justify-content-md-center mt-4">
+                            <a href="javascript:history.back()" class="btn btn-retry btn-lg px-4">
+                                <i class="bi bi-arrow-counterclockwise me-2"></i>Intentar Nuevamente
+                            </a>
+                            <a href="@Url.Action("DatosGenerales", "Formulario")" class="btn btn-outline-secondary btn-lg px-4">
+                                <i class="bi bi-house-fill me-2"></i>Volver al Inicio
+                            </a>
+                        </div>
+
+                        <!-- Información de contacto -->
+                        <div class="mt-4 pt-4 border-top">
+                            <p class="text-muted mb-2">
+                                <small><strong>¿Necesita ayuda?</strong></small>
+                            </p>
+                            <p class="text-muted mb-0">
+                                <small>
+                                    <i class="bi bi-envelope me-1"></i> soporte@evalysi.com | 
+                                    <i class="bi bi-telephone ms-2 me-1"></i> +503 1234-5678
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

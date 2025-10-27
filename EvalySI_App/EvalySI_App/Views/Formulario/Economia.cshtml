@@ -1,0 +1,545 @@
+@model EvalySI_App.Models.Formulario.FormularioPoligrafoViewModel
+
+@{
+    ViewData["Title"] = "Paso 4: Situación Económica";
+    Layout = "~/Views/Shared/Layout_Form.cshtml";
+}
+<!-- CSS personalizado y Bootstrap Icons -->
+<link rel="stylesheet" href="~/css/formulario.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+<div class="page-center">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10 col-xl-8">
+
+                <!-- Header mejorado -->
+                <div class="text-center mb-5">
+                    <h1 class="fw-bold mb-2">@ViewData["Title"]</h1>
+                    <p class="text-muted fs-5">Ingrese su información económica y patrimonial</p>
+                </div>
+
+                <form asp-controller="Formulario" asp-action="Economia" method="post">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <!-- Cuentas Bancarias -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-bank me-2"></i>Cuentas Bancarias</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="cuentas-container">
+                                @if (Model.CuentasBancarias != null && Model.CuentasBancarias.Count > 0)
+                                {
+                                    for (int i = 0; i < Model.CuentasBancarias.Count; i++)
+                                    {
+                                        <div class="item-group border p-3 mb-3">
+                                            <input type="hidden" asp-for="CuentasBancarias[i].IdCuenta" />
+                                            <div class="row">
+                                                <div class="form-group col-md-4">
+                                                    <label asp-for="CuentasBancarias[i].Banco"></label>
+                                                    <input asp-for="CuentasBancarias[i].Banco" class="form-control" />
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label asp-for="CuentasBancarias[i].TipoCuenta"></label>
+                                                    <input asp-for="CuentasBancarias[i].TipoCuenta" class="form-control" placeholder="Ej: Ahorros, Corriente" />
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label asp-for="CuentasBancarias[i].Saldo"></label>
+                                                    <input asp-for="CuentasBancarias[i].Saldo" class="form-control" type="number" step="0.01" />
+                                                </div>
+                                                <div class="form-group col-md-1 d-flex align-items-end">
+                                                    <button type="button" class="btn btn-danger btn-sm btn-remover">Eliminar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <!-- Primer formulario vacío por defecto -->
+                                    <div class="item-group border p-3 mb-3">
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                <label>Banco</label>
+                                                <input type="text" name="CuentasBancarias[0].Banco" class="form-control" />
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label>Tipo de Cuenta</label>
+                                                <input type="text" name="CuentasBancarias[0].TipoCuenta" class="form-control" placeholder="Ej: Ahorros, Corriente" />
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label>Saldo</label>
+                                                <input type="number" name="CuentasBancarias[0].Saldo" class="form-control" step="0.01" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <button type="button" id="btn-agregar-cuenta" class="btn btn-secondary mb-3 mt-3">+ Agregar Cuenta Bancaria</button>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <!-- Tarjetas de Crédito -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-credit-card me-2"></i>Tarjetas de Crédito</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="tarjetas-container">
+                                @if (Model.TarjetasCredito != null && Model.TarjetasCredito.Count > 0)
+                                {
+                                    for (int i = 0; i < Model.TarjetasCredito.Count; i++)
+                                    {
+                                        <div class="item-group border p-3 mb-3">
+                                            <input type="hidden" asp-for="TarjetasCredito[i].IdTarjeta" />
+                                            <div class="row">
+                                                <div class="form-group col-md-4">
+                                                    <label asp-for="TarjetasCredito[i].Banco"></label>
+                                                    <input asp-for="TarjetasCredito[i].Banco" class="form-control" />
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label asp-for="TarjetasCredito[i].LimiteCredito"></label>
+                                                    <input asp-for="TarjetasCredito[i].LimiteCredito" class="form-control" type="number" step="0.01" />
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label asp-for="TarjetasCredito[i].SaldoActual"></label>
+                                                    <input asp-for="TarjetasCredito[i].SaldoActual" class="form-control" type="number" step="0.01" />
+                                                </div>
+                                                <div class="form-group col-md-1 d-flex align-items-end">
+                                                    <button type="button" class="btn btn-danger btn-sm btn-remover">Eliminar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <!-- Primer formulario vacío por defecto -->
+                                    <div class="item-group border p-3 mb-3">
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                <label>Banco</label>
+                                                <input type="text" name="TarjetasCredito[0].Banco" class="form-control" />
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label>Límite de Crédito</label>
+                                                <input type="number" name="TarjetasCredito[0].LimiteCredito" class="form-control" step="0.01" />
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label>Saldo Actual</label>
+                                                <input type="number" name="TarjetasCredito[0].SaldoActual" class="form-control" step="0.01" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <button type="button" id="btn-agregar-tarjeta" class="btn btn-secondary mb-3 mt-3">+ Agregar Tarjeta de Crédito</button>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <!-- Deudas -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-cash-stack me-2"></i>Deudas</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="deudas-container">
+                                @if (Model.Deudas != null && Model.Deudas.Count > 0)
+                                {
+                                    for (int i = 0; i < Model.Deudas.Count; i++)
+                                    {
+                                        <div class="item-group border p-3 mb-3">
+                                            <input type="hidden" asp-for="Deudas[i].IdDeudas" />
+                                            <div class="row">
+                                                <div class="form-group col-md-4">
+                                                    <label asp-for="Deudas[i].Banco"></label>
+                                                    <input asp-for="Deudas[i].Banco" class="form-control" placeholder="Banco/Institución" />
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label asp-for="Deudas[i].MontoMensual"></label>
+                                                    <input asp-for="Deudas[i].MontoMensual" class="form-control" type="number" step="0.01" />
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label asp-for="Deudas[i].Razon"></label>
+                                                    <input asp-for="Deudas[i].Razon" class="form-control" placeholder="Motivo de la deuda" />
+                                                </div>
+                                                <div class="form-group col-md-1 d-flex align-items-end">
+                                                    <button type="button" class="btn btn-danger btn-sm btn-remover">Eliminar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <!-- Primer formulario vacío por defecto -->
+                                    <div class="item-group border p-3 mb-3">
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                <label>Banco/Institución</label>
+                                                <input type="text" name="Deudas[0].Banco" class="form-control" placeholder="Banco/Institución" />
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label>Monto Mensual</label>
+                                                <input type="number" name="Deudas[0].MontoMensual" class="form-control" step="0.01" />
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label>Razón</label>
+                                                <input type="text" name="Deudas[0].Razon" class="form-control" placeholder="Motivo de la deuda" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <button type="button" id="btn-agregar-deuda" class="btn btn-secondary mb-3 mt-3">+ Agregar Deuda</button>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <!-- Gastos Mensuales / Ingresos -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-wallet2 me-2"></i>Ingresos y Gastos Mensuales</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted small mb-4">Registre sus ingresos y gastos mensuales. Marque si es un ingreso o un gasto.</p>
+                            <div id="gastos-container">
+                                @if (Model.GastosMensuales != null && Model.GastosMensuales.Count > 0)
+                                {
+                                    for (int i = 0; i < Model.GastosMensuales.Count; i++)
+                                    {
+                                        <div class="item-group border p-3 mb-3">
+                                            <input type="hidden" asp-for="GastosMensuales[i].IdGM" />
+                                            <div class="row">
+                                                <div class="form-group col-md-5">
+                                                    <label asp-for="GastosMensuales[i].NombreConcepto"></label>
+                                                    <select asp-for="GastosMensuales[i].NombreConcepto" class="form-control">
+                                                        <option value="">-- Seleccione un concepto --</option>
+                                                        <option value="Salario/Sueldo">Salario/Sueldo</option>
+                                                        <option value="Alquiler/Hipoteca">Alquiler/Hipoteca</option>
+                                                        <option value="Alimentación">Alimentación</option>
+                                                        <option value="Transporte">Transporte</option>
+                                                        <option value="Servicios Básicos">Servicios Básicos (Agua, Luz, Gas)</option>
+                                                        <option value="Teléfono/Internet">Teléfono/Internet</option>
+                                                        <option value="Educación">Educación</option>
+                                                        <option value="Salud/Medicamentos">Salud/Medicamentos</option>
+                                                        <option value="Entretenimiento">Entretenimiento</option>
+                                                        <option value="Vestimenta">Vestimenta</option>
+                                                        <option value="Seguros">Seguros</option>
+                                                        <option value="Otros">Otros</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label asp-for="GastosMensuales[i].Monto"></label>
+                                                    <input asp-for="GastosMensuales[i].Monto" class="form-control" type="number" step="0.01" />
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label asp-for="GastosMensuales[i].EsIngreso"></label>
+                                                    <select asp-for="GastosMensuales[i].EsIngreso" class="form-control">
+                                                        <option value="true">Ingreso</option>
+                                                        <option value="false">Gasto</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-1 d-flex align-items-end">
+                                                    <button type="button" class="btn btn-danger btn-sm btn-remover">Eliminar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <!-- Primer formulario vacío por defecto -->
+                                    <div class="item-group border p-3 mb-3">
+                                        <div class="row">
+                                            <div class="form-group col-md-5">
+                                                <label>Concepto</label>
+                                                <select name="GastosMensuales[0].NombreConcepto" class="form-control">
+                                                    <option value="">-- Seleccione un concepto --</option>
+                                                    <option value="Salario/Sueldo">Salario/Sueldo</option>
+                                                    <option value="Alquiler/Hipoteca">Alquiler/Hipoteca</option>
+                                                    <option value="Alimentación">Alimentación</option>
+                                                    <option value="Transporte">Transporte</option>
+                                                    <option value="Servicios Básicos">Servicios Básicos (Agua, Luz, Gas)</option>
+                                                    <option value="Teléfono/Internet">Teléfono/Internet</option>
+                                                    <option value="Educación">Educación</option>
+                                                    <option value="Salud/Medicamentos">Salud/Medicamentos</option>
+                                                    <option value="Entretenimiento">Entretenimiento</option>
+                                                    <option value="Vestimenta">Vestimenta</option>
+                                                    <option value="Seguros">Seguros</option>
+                                                    <option value="Otros">Otros</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label>Monto</label>
+                                                <input type="number" name="GastosMensuales[0].Monto" class="form-control" step="0.01" />
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label>Tipo</label>
+                                                <select name="GastosMensuales[0].EsIngreso" class="form-control">
+                                                    <option value="true">Ingreso</option>
+                                                    <option value="false">Gasto</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <button type="button" id="btn-agregar-gasto" class="btn btn-secondary mb-3 mt-3">+ Agregar Ingreso/Gasto</button>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <!-- Vehículos -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-car-front-fill me-2"></i>Vehículos</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="vehiculos-container">
+                                @if (Model.Vehiculos != null && Model.Vehiculos.Count > 0)
+                                {
+                                    for (int i = 0; i < Model.Vehiculos.Count; i++)
+                                    {
+                                        <div class="item-group border p-3 mb-3">
+                                            <input type="hidden" asp-for="Vehiculos[i].Id" />
+                                            <div class="row">
+                                                <div class="form-group col-md-4">
+                                                    <label asp-for="Vehiculos[i].Marca"></label>
+                                                    <input asp-for="Vehiculos[i].Marca" class="form-control" placeholder="Ej: Toyota, Honda" />
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label asp-for="Vehiculos[i].Modelo"></label>
+                                                    <input asp-for="Vehiculos[i].Modelo" class="form-control" placeholder="Ej: Corolla 2020" />
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label asp-for="Vehiculos[i].Placas"></label>
+                                                    <input asp-for="Vehiculos[i].Placas" class="form-control" placeholder="Número de placa" />
+                                                </div>
+                                                <div class="form-group col-md-1 d-flex align-items-end">
+                                                    <button type="button" class="btn btn-danger btn-sm btn-remover">Eliminar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <!-- Primer formulario vacío por defecto -->
+                                    <div class="item-group border p-3 mb-3">
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                <label>Marca</label>
+                                                <input type="text" name="Vehiculos[0].Marca" class="form-control" placeholder="Ej: Toyota, Honda" />
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label>Modelo</label>
+                                                <input type="text" name="Vehiculos[0].Modelo" class="form-control" placeholder="Ej: Corolla 2020" />
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label>Placas</label>
+                                                <input type="text" name="Vehiculos[0].Placas" class="form-control" placeholder="Número de placa" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <button type="button" id="btn-agregar-vehiculo" class="btn btn-secondary mb-3 mt-3">+ Agregar Vehículo</button>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="form-group mt-4 d-flex justify-content-between">
+                        <a asp-action="HistorialLaboral" class="btn btn-back">Anterior</a>
+                        <button type="submit" class="btn btn-primaryS">Siguiente</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Plantillas Ocultas -->
+<div id="cuenta-template" style="display:none;">
+    <div class="item-group border p-3 mb-3">
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label>Banco</label>
+                <input type="text" name="CuentasBancarias[INDEX].Banco" class="form-control" />
+            </div>
+            <div class="form-group col-md-4">
+                <label>Tipo de Cuenta</label>
+                <input type="text" name="CuentasBancarias[INDEX].TipoCuenta" class="form-control" placeholder="Ej: Ahorros, Corriente" />
+            </div>
+            <div class="form-group col-md-3">
+                <label>Saldo</label>
+                <input type="number" name="CuentasBancarias[INDEX].Saldo" class="form-control" step="0.01" />
+            </div>
+            <div class="form-group col-md-1 d-flex align-items-end">
+                <button type="button" class="btn btn-danger btn-sm btn-remover">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="tarjeta-template" style="display:none;">
+    <div class="item-group border p-3 mb-3">
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label>Banco</label>
+                <input type="text" name="TarjetasCredito[INDEX].Banco" class="form-control" />
+            </div>
+            <div class="form-group col-md-4">
+                <label>Límite de Crédito</label>
+                <input type="number" name="TarjetasCredito[INDEX].LimiteCredito" class="form-control" step="0.01" />
+            </div>
+            <div class="form-group col-md-3">
+                <label>Saldo Actual</label>
+                <input type="number" name="TarjetasCredito[INDEX].SaldoActual" class="form-control" step="0.01" />
+            </div>
+            <div class="form-group col-md-1 d-flex align-items-end">
+                <button type="button" class="btn btn-danger btn-sm btn-remover">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="deuda-template" style="display:none;">
+    <div class="item-group border p-3 mb-3">
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label>Banco/Institución</label>
+                <input type="text" name="Deudas[INDEX].Banco" class="form-control" placeholder="Banco/Institución" />
+            </div>
+            <div class="form-group col-md-3">
+                <label>Monto Mensual</label>
+                <input type="number" name="Deudas[INDEX].MontoMensual" class="form-control" step="0.01" />
+            </div>
+            <div class="form-group col-md-4">
+                <label>Razón</label>
+                <input type="text" name="Deudas[INDEX].Razon" class="form-control" placeholder="Motivo de la deuda" />
+            </div>
+            <div class="form-group col-md-1 d-flex align-items-end">
+                <button type="button" class="btn btn-danger btn-sm btn-remover">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="gasto-template" style="display:none;">
+    <div class="item-group border p-3 mb-3">
+        <div class="row">
+            <div class="form-group col-md-5">
+                <label>Concepto</label>
+                <select name="GastosMensuales[INDEX].NombreConcepto" class="form-control">
+                    <option value="">-- Seleccione un concepto --</option>
+                    <option value="Salario/Sueldo">Salario/Sueldo</option>
+                    <option value="Alquiler/Hipoteca">Alquiler/Hipoteca</option>
+                    <option value="Alimentación">Alimentación</option>
+                    <option value="Transporte">Transporte</option>
+                    <option value="Servicios Básicos">Servicios Básicos (Agua, Luz, Gas)</option>
+                    <option value="Teléfono/Internet">Teléfono/Internet</option>
+                    <option value="Educación">Educación</option>
+                    <option value="Salud/Medicamentos">Salud/Medicamentos</option>
+                    <option value="Entretenimiento">Entretenimiento</option>
+                    <option value="Vestimenta">Vestimenta</option>
+                    <option value="Seguros">Seguros</option>
+                    <option value="Otros">Otros</option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label>Monto</label>
+                <input type="number" name="GastosMensuales[INDEX].Monto" class="form-control" step="0.01" />
+            </div>
+            <div class="form-group col-md-3">
+                <label>Tipo</label>
+                <select name="GastosMensuales[INDEX].EsIngreso" class="form-control">
+                    <option value="true">Ingreso</option>
+                    <option value="false">Gasto</option>
+                </select>
+            </div>
+            <div class="form-group col-md-1 d-flex align-items-end">
+                <button type="button" class="btn btn-danger btn-sm btn-remover">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="vehiculo-template" style="display:none;">
+    <div class="item-group border p-3 mb-3">
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label>Marca</label>
+                <input type="text" name="Vehiculos[INDEX].Marca" class="form-control" placeholder="Ej: Toyota, Honda" />
+            </div>
+            <div class="form-group col-md-4">
+                <label>Modelo</label>
+                <input type="text" name="Vehiculos[INDEX].Modelo" class="form-control" placeholder="Ej: Corolla 2020" />
+            </div>
+            <div class="form-group col-md-3">
+                <label>Placas</label>
+                <input type="text" name="Vehiculos[INDEX].Placas" class="form-control" placeholder="Número de placa" />
+            </div>
+            <div class="form-group col-md-1 d-flex align-items-end">
+                <button type="button" class="btn btn-danger btn-sm btn-remover">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            function reindexar(container) {
+                container.children('.item-group').each(function (i) {
+                    $(this).find('input, select, textarea').each(function () {
+                        if (this.name) {
+                            this.name = this.name.replace(/\[\d+\]/g, '[' + i + ']');
+                        }
+                        if (this.id) {
+                            this.id = this.id.replace(/_\d+_/g, '_' + i + '_');
+                        }
+                    });
+                });
+            }
+
+            function setupDynamicList(buttonId, containerId, templateId) {
+                $(buttonId).on('click', function () {
+                    var $container = $(containerId);
+                    var index = $container.children('.item-group').length;
+                    var templateHtml = $(templateId).html().replace(/INDEX/g, index);
+                    $container.append(templateHtml);
+                    reindexar($container);
+                });
+            }
+
+            setupDynamicList('#btn-agregar-cuenta', '#cuentas-container', '#cuenta-template');
+            setupDynamicList('#btn-agregar-tarjeta', '#tarjetas-container', '#tarjeta-template');
+            setupDynamicList('#btn-agregar-deuda', '#deudas-container', '#deuda-template');
+            setupDynamicList('#btn-agregar-gasto', '#gastos-container', '#gasto-template');
+            setupDynamicList('#btn-agregar-vehiculo', '#vehiculos-container', '#vehiculo-template');
+
+            $(document).on('click', '.btn-remover', function () {
+                var $container = $(this).closest('.item-group').parent();
+                $(this).closest('.item-group').remove();
+                reindexar($container);
+            });
+        });
+    </script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

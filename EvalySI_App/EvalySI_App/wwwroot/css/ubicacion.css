@@ -1,0 +1,230 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f8fafc;
+    color: #fff;
+}
+
+/* Forzar contenedores al 100% */
+body > .container,
+body > div,
+body .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+body > .container > main,
+main {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.ubicacion-section {
+    background-image: url("../images/login_fondo2.jpg");
+    min-height: 100vh;
+    width: 100vw;
+    max-width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    padding: 100px 50px 50px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .ubicacion-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(37,53,81,0.6) 100%);
+        z-index: 0;
+    }
+
+    .ubicacion-section::after {
+        content: '';
+        position: absolute;
+        bottom: -50px;
+        left: -50px;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(rgba(59, 130, 246, 0.1) 0%, transparent 0%);
+        border-radius: 50%;
+    }
+
+.ubicacion-section .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+    .ubicacion-section h2 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 700;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        color: #fff;
+    }
+
+    .ubicacion-section p {
+        font-size: clamp(1rem, 2vw, 1.25rem);
+        margin-bottom: 2rem;
+        text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+        color: rgba(255, 255, 255, 0.95);
+    }
+
+.map-container {
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,.5);
+    position: relative;
+    z-index: 1;
+}
+
+    .map-container iframe {
+        width: 100%;
+        height: 500px;
+        border: 0;
+        display: block;
+    }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .ubicacion-section {
+        padding: 80px 1rem 1rem;
+        background-attachment: scroll;
+    }
+
+    .ubicacion-section .container {
+        padding: 1.5rem;
+    }
+
+    .ubicacion-section h2 {
+        font-size: 2rem;
+    }
+
+    .ubicacion-section p {
+        font-size: 1rem;
+    }
+
+    .map-container {
+        border-radius: 12px;
+    }
+
+        .map-container iframe {
+            height: 350px;
+        }
+}
+
+@media (max-width: 480px) {
+    .ubicacion-section {
+        padding: 80px 0.5rem 0.5rem;
+    }
+
+    .ubicacion-section .container {
+        padding: 1rem;
+    }
+
+    .ubicacion-section h2 {
+        font-size: 1.75rem;
+    }
+
+    .map-container iframe {
+        height: 300px;
+    }
+}
+
+/* Animaciones */
+.container.animate-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
+}
+
+    .container.animate-in h2 {
+        opacity: 0;
+        transform: translateY(15px);
+        animation: fadeInUp 0.6s ease-out 0.4s forwards;
+    }
+
+    .container.animate-in p {
+        opacity: 0;
+        transform: translateY(15px);
+        animation: fadeInUp 0.6s ease-out 0.5s forwards;
+    }
+
+.map-container.animate-map {
+    opacity: 0;
+    transform: scale(0.95);
+    animation: zoomIn 0.8s ease-out 0.6s forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Reducir animaciones para usuarios que lo prefieran */
+@media (prefers-reduced-motion: reduce) {
+    .container.animate-in,
+    .container.animate-in h2,
+    .container.animate-in p,
+    .map-container.animate-map {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}

@@ -1,0 +1,27 @@
+ERROR AL GUARDAR FORMULARIO 
+Fecha: 13/10/2025 21:44:32
+Candidato: Juan t Lopez p
+DPI: 9999999999999
+
+ DETALLES DEL ERROR 
+Mensaje: Violation of UNIQUE KEY constraint 'UQ__Candidat__C035891FA29407E4'. Cannot insert duplicate key in object 'dbo.Candidatos'. The duplicate key value is (9999999999999).
+The statement has been terminated.
+Tipo: SqlException
+
+ STACK TRACE 
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, SqlCommand command, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.CompleteAsyncExecuteReader(Boolean isInternal, Boolean forDescribeParameterEncryption)
+   at Microsoft.Data.SqlClient.SqlCommand.InternalEndExecuteReader(IAsyncResult asyncResult, Boolean isInternal, String endMethod)
+   at Microsoft.Data.SqlClient.SqlCommand.EndExecuteReaderInternal(IAsyncResult asyncResult)
+   at Microsoft.Data.SqlClient.SqlCommand.EndExecuteReaderAsync(IAsyncResult asyncResult)
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<InternalExecuteReaderAsync>b__201_1(IAsyncResult asyncResult)
+   at System.Threading.Tasks.TaskFactory`1.FromAsyncCoreLogic(IAsyncResult iar, Func`2 endFunction, Action`1 endAction, Task`1 promise, Boolean requiresSynchronization)
+--- End of stack trace from previous location ---
+   at EvalySI_App.Data.daoDatosGenerales.InsertarCandidatosAsync(CandidatoViewModel candidato) in D:\ANIMISES\Escritorio\PROYECTO PG\EvalySI_App\EvalySI_App\Data\daoDatosGenerales.cs:line 78
+   at EvalySI_App.Controllers.FormularioController.GuardarFormularioCompleto(FormularioPoligrafoViewModel model) in D:\ANIMISES\Escritorio\PROYECTO PG\EvalySI_App\EvalySI_App\Controllers\FormularioController.cs:line 351

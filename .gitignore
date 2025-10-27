@@ -1,0 +1,14 @@
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.log
+[Rr]elease/
+[Pp]ublish/
+*.mov
+*.mp4
+*.avi
+*.wmv
+PubTmp/

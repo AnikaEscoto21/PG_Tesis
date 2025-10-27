@@ -1,0 +1,519 @@
+@model EvalySI_App.Models.Formulario.FormularioPoligrafoViewModel
+
+@{
+    ViewData["Title"] = "Paso 3: Historial Laboral";
+    Layout = "~/Views/Shared/Layout_Form.cshtml";
+}
+<!-- CSS personalizado y Bootstrap Icons -->
+<link rel="stylesheet" href="~/css/formulario.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+<div class="page-center">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10 col-xl-8">
+
+                <!-- Header mejorado -->
+                <div class="text-center mb-5">
+                    <h1 class="fw-bold mb-2">@ViewData["Title"]</h1>
+                    <p class="text-muted fs-5">Ingrese la información de sus empleos anteriores, comenzando por el más reciente</p>
+                </div>
+
+<form asp-controller="Formulario" asp-action="HistorialLaboral" method="post">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <!-- HISTORIAL LABORAL -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-datos text-white">
+            <h5 class="mb-0"><i class="bi bi-briefcase-fill me-2"></i>Historial Laboral</h5>
+        </div>
+        <div class="card-body">
+            <div id="historial-container">
+                @if (Model.HistorialLaboral != null && Model.HistorialLaboral.Count > 0)
+                {
+                    for (int i = 0; i < Model.HistorialLaboral.Count; i++)
+                    {
+                        <div class="historial-item border p-3 mb-3">
+                            <input type="hidden" asp-for="HistorialLaboral[i].Id" />
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label asp-for="HistorialLaboral[i].Empresa"></label>
+                                    <input asp-for="HistorialLaboral[i].Empresa" class="form-control" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="HistorialLaboral[i].Cargo"></label>
+                                    <input asp-for="HistorialLaboral[i].Cargo" class="form-control" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="HistorialLaboral[i].TelefonoEmpresa"></label>
+                                    <input asp-for="HistorialLaboral[i].TelefonoEmpresa" class="form-control" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="HistorialLaboral[i].FechaIngreso"></label>
+                                    <input asp-for="HistorialLaboral[i].FechaIngreso" class="form-control" type="date" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="HistorialLaboral[i].FechaEgreso"></label>
+                                    <input asp-for="HistorialLaboral[i].FechaEgreso" class="form-control" type="date" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="HistorialLaboral[i].UltimoSalario"></label>
+                                    <input asp-for="HistorialLaboral[i].UltimoSalario" class="form-control" type="number" step="0.01" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="HistorialLaboral[i].CausaRetiro"></label>
+                                    <input asp-for="HistorialLaboral[i].CausaRetiro" class="form-control" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="HistorialLaboral[i].JefeInmediato"></label>
+                                    <input asp-for="HistorialLaboral[i].JefeInmediato" class="form-control" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="HistorialLaboral[i].TelefonoJefe"></label>
+                                    <input asp-for="HistorialLaboral[i].TelefonoJefe" class="form-control" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="HistorialLaboral[i].CargoJefe"></label>
+                                    <input asp-for="HistorialLaboral[i].CargoJefe" class="form-control" />
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label asp-for="HistorialLaboral[i].Observaciones"></label>
+                                    <textarea asp-for="HistorialLaboral[i].Observaciones" class="form-control" rows="2"></textarea>
+                                </div>
+                            </div>
+                            <div class="text-end mt-2">
+                                <button type="button" class="btn btn-danger btn-sm btn-remover">Eliminar</button>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <!-- Primer formulario vacío por defecto -->
+                    <div class="historial-item border p-3 mb-3">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Empresa</label>
+                                <input type="text" name="HistorialLaboral[0].Empresa" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Cargo</label>
+                                <input type="text" name="HistorialLaboral[0].Cargo" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Teléfono de empresa</label>
+                                <input type="text" name="HistorialLaboral[0].TelefonoEmpresa" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Fecha de ingreso</label>
+                                <input type="date" name="HistorialLaboral[0].FechaIngreso" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Fecha de egreso</label>
+                                <input type="date" name="HistorialLaboral[0].FechaEgreso" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Último salario</label>
+                                <input type="number" name="HistorialLaboral[0].UltimoSalario" class="form-control" step="0.01" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Causa de Retiro</label>
+                                <input type="text" name="HistorialLaboral[0].CausaRetiro" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Jefe Inmediato</label>
+                                <input type="text" name="HistorialLaboral[0].JefeInmediato" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Teléfono del jefe</label>
+                                <input type="text" name="HistorialLaboral[0].TelefonoJefe" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Cargo del jefe</label>
+                                <input type="text" name="HistorialLaboral[0].CargoJefe" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Observaciones</label>
+                                <textarea name="HistorialLaboral[0].Observaciones" class="form-control" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <button type="button" id="btn-agregar-historial" class="btn btn-secondary mb-3 mt-3">+ Agregar Empleo</button>
+        </div>
+    </div>
+
+    <hr />
+
+    <!-- PREGUNTAS LABORALES -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-datos text-white">
+            <h5 class="mb-0"><i class="bi bi-question-circle-fill me-2"></i>Preguntas Laborales</h5>
+        </div>
+        <div class="card-body">
+            <p class="text-muted small mb-4">Por favor, responda con sinceridad las siguientes preguntas sobre su experiencia laboral.</p>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label class="form-label">¿Le han pedido que renuncie en algún trabajo?</label>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.PedidoRenuncia" type="radio" value="true" class="form-check-input" id="pedidoRenuncia_si" />
+                        <label class="form-check-label" for="pedidoRenuncia_si">Sí</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.PedidoRenuncia" type="radio" value="false" class="form-check-input" id="pedidoRenuncia_no" />
+                        <label class="form-check-label" for="pedidoRenuncia_no">No</label>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <label class="form-label">¿Ha abandonado algún empleo sin previo aviso?</label>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.AbandonoEmpleo" type="radio" value="true" class="form-check-input" id="abandonoEmpleo_si" />
+                        <label class="form-check-label" for="abandonoEmpleo_si">Sí</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.AbandonoEmpleo" type="radio" value="false" class="form-check-input" id="abandonoEmpleo_no" />
+                        <label class="form-check-label" for="abandonoEmpleo_no">No</label>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <label class="form-label">¿Lo han acusado de deshonestidad en el trabajo?</label>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.AcusadoDeshonestidad" type="radio" value="true" class="form-check-input" id="acusadoDeshonestidad_si" />
+                        <label class="form-check-label" for="acusadoDeshonestidad_si">Sí</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.AcusadoDeshonestidad" type="radio" value="false" class="form-check-input" id="acusadoDeshonestidad_no" />
+                        <label class="form-check-label" for="acusadoDeshonestidad_no">No</label>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <label class="form-label">¿Ha violado reglamentos de la empresa?</label>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.VReglamentos" type="radio" value="true" class="form-check-input" id="vReglamentos_si" />
+                        <label class="form-check-label" for="vReglamentos_si">Sí</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.VReglamentos" type="radio" value="false" class="form-check-input" id="vReglamentos_no" />
+                        <label class="form-check-label" for="vReglamentos_no">No</label>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <label class="form-label">¿Ha obtenido beneficios ilícitos en el trabajo?</label>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.BeneficiosIlicitos" type="radio" value="true" class="form-check-input" id="beneficiosIlicitos_si" />
+                        <label class="form-check-label" for="beneficiosIlicitos_si">Sí</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.BeneficiosIlicitos" type="radio" value="false" class="form-check-input" id="beneficiosIlicitos_no" />
+                        <label class="form-check-label" for="beneficiosIlicitos_no">No</label>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <label class="form-label">¿Ha hecho uso indebido de información confidencial?</label>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.UsoIndebidoInfoConf" type="radio" value="true" class="form-check-input" id="usoIndebidoInfoConf_si" />
+                        <label class="form-check-label" for="usoIndebidoInfoConf_si">Sí</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.UsoIndebidoInfoConf" type="radio" value="false" class="form-check-input" id="usoIndebidoInfoConf_no" />
+                        <label class="form-check-label" for="usoIndebidoInfoConf_no">No</label>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <label class="form-label">¿Ha tenido discusiones fuertes con superiores?</label>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.DiscusionesConSuperiores" type="radio" value="true" class="form-check-input" id="discusionesConSuperiores_si" />
+                        <label class="form-check-label" for="discusionesConSuperiores_si">Sí</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.DiscusionesConSuperiores" type="radio" value="false" class="form-check-input" id="discusionesConSuperiores_no" />
+                        <label class="form-check-label" for="discusionesConSuperiores_no">No</label>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <label class="form-label">¿Ha tenido actas administrativas o procesos disciplinarios?</label>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.ActaAdmOProceso" type="radio" value="true" class="form-check-input" id="actaAdmOProceso_si" />
+                        <label class="form-check-label" for="actaAdmOProceso_si">Sí</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.ActaAdmOProceso" type="radio" value="false" class="form-check-input" id="actaAdmOProceso_no" />
+                        <label class="form-check-label" for="actaAdmOProceso_no">No</label>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <label class="form-label">¿Ha recibido o dado sobornos en el trabajo?</label>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.Sobornos" type="radio" value="true" class="form-check-input" id="sobornos_si" />
+                        <label class="form-check-label" for="sobornos_si">Sí</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.Sobornos" type="radio" value="false" class="form-check-input" id="sobornos_no" />
+                        <label class="form-check-label" for="sobornos_no">No</label>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <label class="form-label">¿Ha participado en sabotaje laboral?</label>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.Sabotaje" type="radio" value="true" class="form-check-input" id="sabotaje_si" />
+                        <label class="form-check-label" for="sabotaje_si">Sí</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.Sabotaje" type="radio" value="false" class="form-check-input" id="sabotaje_no" />
+                        <label class="form-check-label" for="sabotaje_no">No</label>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <label class="form-label">¿Ha tenido demandas en su contra?</label>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.DemandaContra" type="radio" value="true" class="form-check-input" id="demandaContra_si" />
+                        <label class="form-check-label" for="demandaContra_si">Sí</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.DemandaContra" type="radio" value="false" class="form-check-input" id="demandaContra_no" />
+                        <label class="form-check-label" for="demandaContra_no">No</label>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <label class="form-label">¿Ha demandado a algún empleador?</label>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.DemandaAAlguien" type="radio" value="true" class="form-check-input" id="demandaAAlguien_si" />
+                        <label class="form-check-label" for="demandaAAlguien_si">Sí</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="LaboralPreguntas.DemandaAAlguien" type="radio" value="false" class="form-check-input" id="demandaAAlguien_no" />
+                        <label class="form-check-label" for="demandaAAlguien_no">No</label>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="row">
+                <div class="form-group col-md-12 mb-3">
+                    <label asp-for="LaboralPreguntas.ProblemasLaborales" class="form-label"></label>
+                    <textarea asp-for="LaboralPreguntas.ProblemasLaborales" class="form-control" rows="3" placeholder="Describa cualquier problema laboral relevante"></textarea>
+                    <span asp-validation-for="LaboralPreguntas.ProblemasLaborales" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-12 mb-3">
+                    <label asp-for="LaboralPreguntas.FaltasAdmSerias" class="form-label"></label>
+                    <textarea asp-for="LaboralPreguntas.FaltasAdmSerias" class="form-control" rows="3" placeholder="Describa cualquier falta administrativa seria"></textarea>
+                    <span asp-validation-for="LaboralPreguntas.FaltasAdmSerias" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-12 mb-3">
+                    <label asp-for="LaboralPreguntas.OpinionSindicatos" class="form-label"></label>
+                    <textarea asp-for="LaboralPreguntas.OpinionSindicatos" class="form-control" rows="3" placeholder="Comparta su opinión sobre los sindicatos"></textarea>
+                    <span asp-validation-for="LaboralPreguntas.OpinionSindicatos" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label asp-for="LaboralPreguntas.Observaciones" class="form-label"></label>
+                    <textarea asp-for="LaboralPreguntas.Observaciones" class="form-control" rows="3" placeholder="Observaciones adicionales"></textarea>
+                    <span asp-validation-for="LaboralPreguntas.Observaciones" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <!-- PROCESO DE CONTRATACIÓN -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-datos text-white">
+            <h5 class="mb-0"><i class="bi bi-file-earmark-check-fill me-2"></i>Proceso de Contratación</h5>
+        </div>
+        <div class="card-body">
+            <p class="text-muted small mb-4">Información sobre la veracidad de los documentos presentados.</p>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label class="form-label">¿Ha ocultado su identidad en este proceso?</label>
+                    <div class="form-check">
+                        <input asp-for="ProcesoContratacion.OcultoIdentidad" type="radio" value="true" class="form-check-input" id="ocultoIdentidad_si" />
+                        <label class="form-check-label" for="ocultoIdentidad_si">Sí</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="ProcesoContratacion.OcultoIdentidad" type="radio" value="false" class="form-check-input" id="ocultoIdentidad_no" />
+                        <label class="form-check-label" for="ocultoIdentidad_no">No</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6 mb-3">
+                <label class="form-label">¿Ha hecho omisión deliberada de información?</label>
+                <div class="form-check">
+                    <input asp-for="ProcesoContratacion.OmisionDeliberada" type="radio" value="true" class="form-check-input" id="omisionDeliberada_si" />
+                    <label class="form-check-label" for="omisionDeliberada_si">Sí</label>
+                </div>
+                <div class="form-check">
+                    <input asp-for="ProcesoContratacion.OmisionDeliberada" type="radio" value="false" class="form-check-input" id="omisionDeliberada_no" />
+                    <label class="form-check-label" for="omisionDeliberada_no">No</label>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6 mb-3">
+                <label class="form-label">¿Ha presentado algún documento falso?</label>
+                <div class="form-check">
+                    <input asp-for="ProcesoContratacion.DocumentoFalso" type="radio" value="true" class="form-check-input" id="documentoFalso_si" />
+                    <label class="form-check-label" for="documentoFalso_si">Sí</label>
+                </div>
+                <div class="form-check">
+                    <input asp-for="ProcesoContratacion.DocumentoFalso" type="radio" value="false" class="form-check-input" id="documentoFalso_no" />
+                    <label class="form-check-label" for="documentoFalso_no">No</label>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6 mb-3">
+                <label class="form-label">¿Hay información falsa en su CV?</label>
+                <div class="form-check">
+                    <input asp-for="ProcesoContratacion.InfoFalsaCV" type="radio" value="true" class="form-check-input" id="infoFalsaCV_si" />
+                    <label class="form-check-label" for="infoFalsaCV_si">Sí</label>
+                </div>
+                <div class="form-check">
+                    <input asp-for="ProcesoContratacion.InfoFalsaCV" type="radio" value="false" class="form-check-input" id="infoFalsaCV_no" />
+                    <label class="form-check-label" for="infoFalsaCV_no">No</label>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6 mb-3">
+                <label class="form-label">¿Todos sus documentos están en orden?</label>
+                <div class="form-check">
+                    <input asp-for="ProcesoContratacion.DocumentosEnOrden" type="radio" value="true" class="form-check-input" id="documentosEnOrden_si" />
+                    <label class="form-check-label" for="documentosEnOrden_si">Sí</label>
+                </div>
+                <div class="form-check">
+                    <input asp-for="ProcesoContratacion.DocumentosEnOrden" type="radio" value="false" class="form-check-input" id="documentosEnOrden_no" />
+                    <label class="form-check-label" for="documentosEnOrden_no">No</label>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label asp-for="ProcesoContratacion.Observaciones" class="form-label">Observaciones</label>
+                <textarea asp-for="ProcesoContratacion.Observaciones" class="form-control" rows="3" placeholder="Observaciones adicionales sobre el proceso de contratación"></textarea>
+                <span asp-validation-for="ProcesoContratacion.Observaciones" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="form-group mt-4 d-flex justify-content-between">
+        <a asp-action="Estudios" class="btn btn-back">Anterior</a>
+        <button type="submit" class="btn btn-primaryS">Siguiente</button>
+    </div>
+</form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Plantilla para un nuevo historial (oculta) -->
+<div id="historial-template" style="display:none;">
+    <div class="historial-item border p-3 mb-3">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label>Empresa</label>
+                <input type="text" name="HistorialLaboral[INDEX].Empresa" class="form-control" />
+            </div>
+            <div class="form-group col-md-6">
+                <label>Cargo</label>
+                <input type="text" name="HistorialLaboral[INDEX].Cargo" class="form-control" />
+            </div>
+            <div class="form-group col-md-6">
+                <label>Teléfono de empresa</label>
+                <input type="text" name="HistorialLaboral[INDEX].TelefonoEmpresa" class="form-control" />
+            </div>
+            <div class="form-group col-md-6">
+                <label>Fecha de ingreso</label>
+                <input type="date" name="HistorialLaboral[INDEX].FechaIngreso" class="form-control" />
+            </div>
+            <div class="form-group col-md-6">
+                <label>Fecha de egreso</label>
+                <input type="date" name="HistorialLaboral[INDEX].FechaEgreso" class="form-control" />
+            </div>
+            <div class="form-group col-md-6">
+                <label>Último salario</label>
+                <input type="number" name="HistorialLaboral[INDEX].UltimoSalario" class="form-control" step="0.01" />
+            </div>
+            <div class="form-group col-md-6">
+                <label>Causa de Retiro</label>
+                <input type="text" name="HistorialLaboral[INDEX].CausaRetiro" class="form-control" />
+            </div>
+            <div class="form-group col-md-6">
+                <label>Jefe Inmediato</label>
+                <input type="text" name="HistorialLaboral[INDEX].JefeInmediato" class="form-control" />
+            </div>
+            <div class="form-group col-md-6">
+                <label>Teléfono del jefe</label>
+                <input type="text" name="HistorialLaboral[INDEX].TelefonoJefe" class="form-control" />
+            </div>
+            <div class="form-group col-md-6">
+                <label>Cargo del jefe</label>
+                <input type="text" name="HistorialLaboral[INDEX].CargoJefe" class="form-control" />
+            </div>
+            <div class="form-group col-md-12">
+                <label>Observaciones</label>
+                <textarea name="HistorialLaboral[INDEX].Observaciones" class="form-control" rows="2"></textarea>
+            </div>
+        </div>
+        <div class="text-end mt-2">
+            <button type="button" class="btn btn-danger btn-sm btn-remover">Eliminar</button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+
+            function reindexar(container) {
+                container.children('.historial-item').each(function (i) {
+                    $(this).find('input, select, textarea').each(function () {
+                        if (this.name) {
+                            this.name = this.name.replace(/\[\d+\]/g, '[' + i + ']');
+                        }
+                        if (this.id) {
+                            this.id = this.id.replace(/_\d+_/g, '_' + i + '_');
+                        }
+                    });
+                });
+            }
+
+            $('#btn-agregar-historial').on('click', function () {
+                var $container = $('#historial-container');
+                var index = $container.children('.historial-item').length;
+                var templateHtml = $('#historial-template').html().replace(/INDEX/g, index);
+                $container.append(templateHtml);
+                reindexar($container); 
+            });
+
+            $(document).on('click', '.btn-remover', function () {
+                var $container = $('#historial-container'); 
+                $(this).closest('.historial-item').remove();
+                reindexar($container);
+            });
+        });
+    </script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

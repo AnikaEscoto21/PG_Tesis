@@ -1,0 +1,505 @@
+
+@model EvalySI_App.Models.Formulario.FormularioPoligrafoViewModel
+
+@{
+    ViewData["Title"] = "Paso 5: Salud y Hábitos";
+    Layout = "~/Views/Shared/Layout_Form.cshtml";
+}
+<!-- CSS personalizado y Bootstrap Icons -->
+<link rel="stylesheet" href="~/css/formulario.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+<div class="page-center">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10 col-xl-8">
+
+                <!-- Header mejorado -->
+                <div class="text-center mb-5">
+                    <h1 class="fw-bold mb-2">@ViewData["Title"]</h1>
+                    <p class="text-muted fs-5">Información sobre su estado de salud, hábitos y condiciones médicas</p>
+                </div>
+
+                <form asp-controller="Formulario" asp-action="Salud" method="post">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <!-- Historia Médica -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-heart-pulse-fill me-2"></i>Historia Médica</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label asp-for="HistoriaMedica.CondicionGeneral">Condición General de Salud</label>
+                                    <input asp-for="HistoriaMedica.CondicionGeneral" class="form-control" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="HistoriaMedica.MalestarActual">¿Tiene algún malestar actualmente?</label>
+                                    <input asp-for="HistoriaMedica.MalestarActual" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label asp-for="HistoriaMedica.HoraUltimaComida">Hora de su última comida</label>
+                                    <input asp-for="HistoriaMedica.HoraUltimaComida" class="form-control" />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label asp-for="HistoriaMedica.HorasDormidasAyer">Horas dormidas ayer</label>
+                                    <input asp-for="HistoriaMedica.HorasDormidasAyer" class="form-control" />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label asp-for="HistoriaMedica.EnfermedadGrave">¿Ha padecido alguna enfermedad grave?</label>
+                                    <input asp-for="HistoriaMedica.EnfermedadGrave" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" asp-for="HistoriaMedica.Embarazo" class="form-check-input" />
+                                <label class="form-check-label" asp-for="HistoriaMedica.Embarazo">¿Está embarazada?</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <!-- Medicamentos y Tratamientos -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-capsule-pill me-2"></i>Medicamentos y Tratamientos</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label asp-for="UsoMedicamentos.UltimoChequeoMedico">Último chequeo médico</label>
+                                    <input asp-for="UsoMedicamentos.UltimoChequeoMedico" class="form-control" />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label asp-for="UsoMedicamentos.UltimoChequeoOdonto">Último chequeo odontológico</label>
+                                    <input asp-for="UsoMedicamentos.UltimoChequeoOdonto" class="form-control" />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label asp-for="UsoMedicamentos.UltimoChequeoOftalmo">Último chequeo oftalmológico</label>
+                                    <input asp-for="UsoMedicamentos.UltimoChequeoOftalmo" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Consume medicamentos?</label>
+                                        <div class="form-check">
+                                            <input asp-for="UsoMedicamentos.ConsumeMedicamentos" type="radio" value="true" class="form-check-input" id="consumeMedicamentos_si" />
+                                            <label class="form-check-label" for="consumeMedicamentos_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="UsoMedicamentos.ConsumeMedicamentos" type="radio" value="false" class="form-check-input" id="consumeMedicamentos_no" />
+                                            <label class="form-check-label" for="consumeMedicamentos_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Tratamiento médico reciente?</label>
+                                        <div class="form-check">
+                                            <input asp-for="UsoMedicamentos.TratMedicoReciente" type="radio" value="true" class="form-check-input" id="tratMedicoReciente_si" />
+                                            <label class="form-check-label" for="tratMedicoReciente_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="UsoMedicamentos.TratMedicoReciente" type="radio" value="false" class="form-check-input" id="tratMedicoReciente_no" />
+                                            <label class="form-check-label" for="tratMedicoReciente_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha tenido cirugías?</label>
+                                        <div class="form-check">
+                                            <input asp-for="UsoMedicamentos.Cirugia" type="radio" value="true" class="form-check-input" id="cirugia_si" />
+                                            <label class="form-check-label" for="cirugia_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="UsoMedicamentos.Cirugia" type="radio" value="false" class="form-check-input" id="cirugia_no" />
+                                            <label class="form-check-label" for="cirugia_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Alergia a medicamentos?</label>
+                                        <div class="form-check">
+                                            <input asp-for="UsoMedicamentos.AlergiaMedicamento" type="radio" value="true" class="form-check-input" id="alergiaMedicamento_si" />
+                                            <label class="form-check-label" for="alergiaMedicamento_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="UsoMedicamentos.AlergiaMedicamento" type="radio" value="false" class="form-check-input" id="alergiaMedicamento_no" />
+                                            <label class="form-check-label" for="alergiaMedicamento_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Alergia a comida?</label>
+                                        <div class="form-check">
+                                            <input asp-for="UsoMedicamentos.AlergiaComida" type="radio" value="true" class="form-check-input" id="alergiaComida_si" />
+                                            <label class="form-check-label" for="alergiaComida_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="UsoMedicamentos.AlergiaComida" type="radio" value="false" class="form-check-input" id="alergiaComida_no" />
+                                            <label class="form-check-label" for="alergiaComida_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Usa lentes?</label>
+                                        <div class="form-check">
+                                            <input asp-for="UsoMedicamentos.UsaLentes" type="radio" value="true" class="form-check-input" id="usaLentes_si" />
+                                            <label class="form-check-label" for="usaLentes_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="UsoMedicamentos.UsaLentes" type="radio" value="false" class="form-check-input" id="usaLentes_no" />
+                                            <label class="form-check-label" for="usaLentes_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Fuma?</label>
+                                        <div class="form-check">
+                                            <input asp-for="UsoMedicamentos.Fuma" type="radio" value="true" class="form-check-input" id="fuma_si" />
+                                            <label class="form-check-label" for="fuma_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="UsoMedicamentos.Fuma" type="radio" value="false" class="form-check-input" id="fuma_no" />
+                                            <label class="form-check-label" for="fuma_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ingirió alcohol en las últimas 24h?</label>
+                                        <div class="form-check">
+                                            <input asp-for="UsoMedicamentos.IngestaAlcohol24h" type="radio" value="true" class="form-check-input" id="ingestaAlcohol24h_si" />
+                                            <label class="form-check-label" for="ingestaAlcohol24h_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="UsoMedicamentos.IngestaAlcohol24h" type="radio" value="false" class="form-check-input" id="ingestaAlcohol24h_no" />
+                                            <label class="form-check-label" for="ingestaAlcohol24h_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Consumió drogas en los últimos 30 días?</label>
+                                        <div class="form-check">
+                                            <input asp-for="UsoMedicamentos.Droga30dias" type="radio" value="true" class="form-check-input" id="droga30dias_si" />
+                                            <label class="form-check-label" for="droga30dias_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="UsoMedicamentos.Droga30dias" type="radio" value="false" class="form-check-input" id="droga30dias_no" />
+                                            <label class="form-check-label" for="droga30dias_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mt-2">
+                                <label asp-for="UsoMedicamentos.Observaciones">Observaciones</label>
+                                <textarea asp-for="UsoMedicamentos.Observaciones" class="form-control" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <!-- Hábitos de Alcohol -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-cup-straw me-2"></i>Hábitos de Consumo de Alcohol</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label>¿Cuándo fue la última vez que bebió?</label>
+                                    <input asp-for="HabitosAlcohol.UltimaVezBebio" class="form-control" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Promedio de consumo mensual</label>
+                                    <input asp-for="HabitosAlcohol.PromedioMensual" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label>¿Cómo se comporta cuando se excede?</label>
+                                    <input asp-for="HabitosAlcohol.ComoEsCuandoExcede" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha peleado al beber?</label>
+                                        <div class="form-check">
+                                            <input asp-for="HabitosAlcohol.PeleaAlBeber" type="radio" value="true" class="form-check-input" id="peleaAlBeber_si" />
+                                            <label class="form-check-label" for="peleaAlBeber_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="HabitosAlcohol.PeleaAlBeber" type="radio" value="false" class="form-check-input" id="peleaAlBeber_no" />
+                                            <label class="form-check-label" for="peleaAlBeber_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha sido detenido al beber?</label>
+                                        <div class="form-check">
+                                            <input asp-for="HabitosAlcohol.DetenidoAlBeber" type="radio" value="true" class="form-check-input" id="detenidoAlBeber_si" />
+                                            <label class="form-check-label" for="detenidoAlBeber_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="HabitosAlcohol.DetenidoAlBeber" type="radio" value="false" class="form-check-input" id="detenidoAlBeber_no" />
+                                            <label class="form-check-label" for="detenidoAlBeber_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha estado en tratamiento para controlar su forma de beber?</label>
+                                        <div class="form-check">
+                                            <input asp-for="HabitosAlcohol.TratamientoControlBeber" type="radio" value="true" class="form-check-input" id="tratamientoControlBeber_si" />
+                                            <label class="form-check-label" for="tratamientoControlBeber_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="HabitosAlcohol.TratamientoControlBeber" type="radio" value="false" class="form-check-input" id="tratamientoControlBeber_no" />
+                                            <label class="form-check-label" for="tratamientoControlBeber_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha trabajado ebrio o con resaca?</label>
+                                        <div class="form-check">
+                                            <input asp-for="HabitosAlcohol.LaboroEbrioResaca" type="radio" value="true" class="form-check-input" id="laboroEbrioResaca_si" />
+                                            <label class="form-check-label" for="laboroEbrioResaca_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="HabitosAlcohol.LaboroEbrioResaca" type="radio" value="false" class="form-check-input" id="laboroEbrioResaca_no" />
+                                            <label class="form-check-label" for="laboroEbrioResaca_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha faltado al trabajo por beber?</label>
+                                        <div class="form-check">
+                                            <input asp-for="HabitosAlcohol.FaltoPorBeber" type="radio" value="true" class="form-check-input" id="faltoPorBeber_si" />
+                                            <label class="form-check-label" for="faltoPorBeber_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="HabitosAlcohol.FaltoPorBeber" type="radio" value="false" class="form-check-input" id="faltoPorBeber_no" />
+                                            <label class="form-check-label" for="faltoPorBeber_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha bebido en horas de trabajo?</label>
+                                        <div class="form-check">
+                                            <input asp-for="HabitosAlcohol.BebioEnHorasTrabajo" type="radio" value="true" class="form-check-input" id="bebioEnHorasTrabajo_si" />
+                                            <label class="form-check-label" for="bebioEnHorasTrabajo_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="HabitosAlcohol.BebioEnHorasTrabajo" type="radio" value="false" class="form-check-input" id="bebioEnHorasTrabajo_no" />
+                                            <label class="form-check-label" for="bebioEnHorasTrabajo_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <!-- Consumo de Drogas -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-prescription2 me-2"></i>Consumo de Drogas</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label>¿Cuándo fue la última vez que consumió?</label>
+                                    <input asp-for="Drogas.UltimaVezConsumo" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Alguna vez ha probado drogas?</label>
+                                        <div class="form-check">
+                                            <input asp-for="Drogas.ProboDrogas" type="radio" value="true" class="form-check-input" id="proboDrogas_si" />
+                                            <label class="form-check-label" for="proboDrogas_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="Drogas.ProboDrogas" type="radio" value="false" class="form-check-input" id="proboDrogas_no" />
+                                            <label class="form-check-label" for="proboDrogas_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha tenido cualquier tipo de contacto con drogas?</label>
+                                        <div class="form-check">
+                                            <input asp-for="Drogas.CualquierContacto" type="radio" value="true" class="form-check-input" id="cualquierContacto_si" />
+                                            <label class="form-check-label" for="cualquierContacto_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="Drogas.CualquierContacto" type="radio" value="false" class="form-check-input" id="cualquierContacto_no" />
+                                            <label class="form-check-label" for="cualquierContacto_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha guardado droga de otra persona?</label>
+                                        <div class="form-check">
+                                            <input asp-for="Drogas.GuardoDrogaAjena" type="radio" value="true" class="form-check-input" id="guardoDrogaAjena_si" />
+                                            <label class="form-check-label" for="guardoDrogaAjena_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="Drogas.GuardoDrogaAjena" type="radio" value="false" class="form-check-input" id="guardoDrogaAjena_no" />
+                                            <label class="form-check-label" for="guardoDrogaAjena_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Ha tenido contacto con vendedores de droga?</label>
+                                        <div class="form-check">
+                                            <input asp-for="Drogas.ContactoConVendedores" type="radio" value="true" class="form-check-input" id="contactoConVendedores_si" />
+                                            <label class="form-check-label" for="contactoConVendedores_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="Drogas.ContactoConVendedores" type="radio" value="false" class="form-check-input" id="contactoConVendedores_no" />
+                                            <label class="form-check-label" for="contactoConVendedores_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">¿Algún familiar consume drogas?</label>
+                                        <div class="form-check">
+                                            <input asp-for="Drogas.FamiliarConsume" type="radio" value="true" class="form-check-input" id="familiarConsume_si" />
+                                            <label class="form-check-label" for="familiarConsume_si">Sí</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input asp-for="Drogas.FamiliarConsume" type="radio" value="false" class="form-check-input" id="familiarConsume_no" />
+                                            <label class="form-check-label" for="familiarConsume_no">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <!-- Condiciones Médicas Específicas -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-datos text-white">
+                            <h5 class="mb-0"><i class="bi bi-clipboard2-pulse-fill me-2"></i>Condiciones Médicas Específicas</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted small mb-4">Registre cualquier condición médica que haya padecido o padezca actualmente.</p>
+                            <div id="condiciones-container">
+                                @if (Model.HistoriaMedicaConds != null)
+                                {
+                                    for (int i = 0; i < Model.HistoriaMedicaConds.Count; i++)
+                                    {
+                                        <div class="condicion-item border p-3 mb-3">
+                                            <div class="row">
+                                                <div class="form-group col-md-5">
+                                                    <label>Condición Médica</label>
+                                                    <input asp-for="HistoriaMedicaConds[i].CondicionNombre" class="form-control" placeholder="Ej: Diabetes, Hipertensión, etc." />
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label asp-for="HistoriaMedicaConds[i].Especificar">Especificar detalles</label>
+                                                    <input asp-for="HistoriaMedicaConds[i].Especificar" class="form-control" placeholder="Detalles adicionales" />
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label asp-for="HistoriaMedicaConds[i].Fecha">Fecha/Período</label>
+                                                    <input asp-for="HistoriaMedicaConds[i].Fecha" class="form-control" placeholder="Ej: 2020-2023" />
+                                                </div>
+                                                <div class="form-group col-md-1 d-flex align-items-end">
+                                                    <button type="button" class="btn btn-danger btn-sm btn-remover-condicion">Eliminar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <!-- Primer formulario vacío por defecto -->
+                                    <div class="condicion-item border p-3 mb-3">
+                                        <div class="row">
+                                            <div class="form-group col-md-5">
+                                                <label>Condición Médica</label>
+                                                <input type="text" name="HistoriaMedicaConds[0].CondicionNombre" class="form-control" placeholder="Ej: Diabetes, Hipertensión, etc." />
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label>Especificar detalles</label>
+                                                <input type="text" name="HistoriaMedicaConds[0].Especificar" class="form-control" placeholder="Detalles adicionales" />
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label>Fecha/Período</label>
+                                                <input type="text" name="HistoriaMedicaConds[0].Fecha" class="form-control" placeholder="Ej: 2020-2023" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <button type="button" id="btn-agregar-condicion" class="btn btn-secondary mb-3 mt-3">+ Agregar Condición Médica</button>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="form-group mt-4 d-flex justify-content-between">
+                        <a asp-action="Economia" class="btn btn-back">Anterior</a>
+                        <button type="submit" class="btn btn-primaryS">Siguiente</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Plantilla para condiciones médicas (oculta) -->
+<div id="condicion-template" style="display:none;">
+    <div class="condicion-item border p-3 mb-3">
+        <div class="row">
+            <div class="form-group col-md-5">
+                <label>Condición Médica</label>
+                <input type="text" name="HistoriaMedicaConds[INDEX].CondicionNombre" class="form-control" placeholder="Ej: Diabetes, Hipertensión, etc." />
+            </div>
+            <div class="form-group col-md-4">
+                <label>Especificar detalles</label>
+                <input type="text" name="HistoriaMedicaConds[INDEX].Especificar" class="form-control" placeholder="Detalles adicionales" />
+            </div>
+            <div class="form-group col-md-2">
+                <label>Fecha/Período</label>
+                <input type="text" name="HistoriaMedicaConds[INDEX].Fecha" class="form-control" placeholder="Ej: 2020-2023" />
+            </div>
+            <div class="form-group col-md-1 d-flex align-items-end">
+                <button type="button" class="btn btn-danger btn-sm btn-remover-condicion">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            function reindexar(container) {
+                container.children('.condicion-item').each(function (i) {
+                    $(this).find('input, select, textarea').each(function () {
+                        if (this.name) {
+                            this.name = this.name.replace(/\[\d+\]/g, '[' + i + ']');
+                        }
+                        if (this.id) {
+                            this.id = this.id.replace(/_\d+_/g, '_' + i + '_');
+                        }
+                    });
+                });
+            }
+
+            $('#btn-agregar-condicion').on('click', function () {
+                var $container = $('#condiciones-container');
+                var index = $container.children('.condicion-item').length;
+                var templateHtml = $('#condicion-template').html().replace(/INDEX/g, index);
+                $container.append(templateHtml);
+                reindexar($container);
+            });
+
+            $(document).on('click', '.btn-remover-condicion', function () {
+                var $container = $('#condiciones-container');
+                $(this).closest('.condicion-item').remove();
+                reindexar($container);
+            });
+        });
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

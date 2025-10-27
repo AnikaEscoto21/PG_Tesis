@@ -1,0 +1,272 @@
+﻿/* ===== ANIMACIONES LOGIN ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Fondo de la página */
+.login-page {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #253551 0%, #253551 20%, #E8E8E8 100%);
+    background-attachment: fixed;
+    animation: fadeIn 0.8s ease-out;
+}
+
+
+/* Tarjeta de login */
+.login-card {
+    border-radius: 1rem !important;
+    background-color: white;
+    border: none !important;
+    animation: slideInUp 0.8s ease-out;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+/* Imagen lateral */
+.login-image {
+    border-radius: 1rem 0 0 1rem !important;
+    height: 90%;
+    object-fit: cover;
+    background-position: center;
+    animation: slideInLeft 0.8s ease-out;
+}
+
+/* Botón login */
+.btn-login {
+    background-color: #253551 !important;
+    color: white !important;
+    border: none !important;
+    padding: 12px 20px !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+}
+
+
+    .btn-login:focus {
+        background-color: #003380 !important;
+        box-shadow: 0 0 0 0.25rem rgba(0, 71, 171, 0.25) !important;
+    }
+
+    .btn-login:disabled {
+        background-color: #6c757d !important;
+        transform: none !important;
+        cursor: not-allowed !important;
+    }
+
+.btn-regresar {
+    background-color: #253551 !important;
+    color: white !important;
+    border: none !important;
+    padding: 12px 20px !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+}
+
+
+    .btn-login:focus {
+        background-color: #003380 !important;
+        box-shadow: 0 0 0 0.25rem rgba(0, 71, 171, 0.25) !important;
+    }
+
+    .btn-login:disabled {
+        background-color: #6c757d !important;
+        transform: none !important;
+        cursor: not-allowed !important;
+    }
+
+/* Iconos */
+.bi {
+    margin-right: 8px;
+    color: #253551;
+}
+
+/* Apariencia del formulario */
+.form-control:focus {
+    border-color: #0047ab !important;
+    box-shadow: 0 0 0 0.25rem rgba(0, 71, 171, 0.25) !important;
+}
+
+.form-control {
+    border: 2px solid #253551 !important;
+    border-radius: 8px !important;
+}
+
+    .form-control.is-invalid {
+        border-color: #253551 !important;
+    }
+
+.form-label {
+    font-weight: 600 !important;
+    color: #333 !important;
+    margin-bottom: 8px !important;
+}
+
+/* Mensajes de error */
+.invalid-feedback {
+    font-size: 0.875rem !important;
+    color: #dc3545 !important;
+    font-weight: 500 !important;
+}
+
+/* Alertas */
+.alert {
+    border-radius: 8px !important;
+    border: none !important;
+    font-weight: 500 !important;
+}
+
+.alert-danger {
+    background-color: #f8d7da !important;
+    color: #721c24 !important;
+}
+
+/* Textos de ayuda */
+.text-muted {
+    color: #253551 !important;
+}
+
+.small {
+    font-size: 0.875rem !important;
+}
+
+/* Mejoras adicionales */
+.card-body {
+    padding: 2.5rem !important;
+}
+
+h2 {
+    color: #253551 !important;
+    font-size: 2rem !important;
+    animation: slideInDown 0.6s ease-out;
+}
+
+.form-group {
+    animation: slideInRight 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+.form-group:nth-child(1) { animation-delay: 0.2s; }
+.form-group:nth-child(2) { animation-delay: 0.3s; }
+.form-group:nth-child(3) { animation-delay: 0.4s; }
+
+.btn-login {
+    animation: fadeIn 0.8s ease-out 0.5s both;
+}
+
+.alert-danger {
+    animation: shake 0.5s ease-out;
+}
+
+.bi {
+    animation: float 2s ease-in-out infinite;
+}
+
+/* Contenedor de contraseña */
+.password-input-container {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #253551;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 10;
+}
+
+    .password-toggle:hover {
+        color: #253551;
+    }
+
+
+
+

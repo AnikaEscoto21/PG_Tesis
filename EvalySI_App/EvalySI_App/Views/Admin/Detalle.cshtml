@@ -1,0 +1,528 @@
+﻿@model EvalySI_App.Models.Formulario.FormularioPoligrafoViewModel
+@{
+    ViewData["Title"] = "Detalle del Candidato";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <!-- Bootstrap + Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/css/admin.css">
+</head>
+<body class="detalle-body">
+
+    <div class="empleado-detalle-container">
+        <!-- Header -->
+        <div class="page-header">
+            <div class="header-content">
+                <h1 class="page-title"><i class="bi bi-person-badge"></i> Detalle del Candidato</h1>
+                <p class="page-subtitle">Información completa del formulario de polígrafo</p>
+            </div>
+            <div class="header-actions">
+                <a asp-action="Index" class="btn-back"><i class="bi bi-arrow-left"></i> Volver</a>
+            </div>
+        </div>
+
+        <!-- Tarjeta superior con info esencial -->
+        <div class="empleado-card">
+            <div class="empleado-header">
+                <div class="empleado-avatar">
+                    <div class="avatar-image">@Model?.Candidato?.Nombres?.FirstOrDefault()</div>
+                    <div class="avatar-status active" title="Activo"><i class="bi bi-check-lg"></i></div>
+                </div>
+                <div class="empleado-info">
+                    <div class="empleado-nombre">@($"{Model?.Candidato?.Nombres} {Model?.Candidato?.Apellidos}")</div>
+                    <div class="empleado-id">DPI: @Model?.Candidato?.DPI</div>
+                    <div class="empleado-badges">
+                        <span class="badge"><i class="bi bi-briefcase"></i>@Model?.Candidato?.Profesion</span>
+                        <span class="badge"><i class="bi bi-translate"></i>@Model?.Candidato?.PorcentajeIngles% inglés</span>
+                        <span class="badge"><i class="bi bi-geo-alt"></i>@Model?.Candidato?.LugarNacimiento</span>
+                    </div>
+                </div>
+                <div class="empleado-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">@Model?.Candidato?.Edad</span>
+                        <span class="stat-label">Años</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">@Model?.Candidato?.EstadoCivil</span>
+                        <span class="stat-label">Estado civil</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTENIDO COMPLETO -->
+            <div class="empleado-content">
+                        <!-- DATOS GENERALES -->
+                        <section class="info-section" id="datos">
+                            <div class="section-header"><h3 class="section-title"><i class="bi bi-person-fill"></i> Datos Generales</h3></div>
+                            <div class="info-grid">
+                                <div class="info-item"><div class="info-label"><i class="bi bi-card-text"></i> Nombres</div><div class="info-value">@Model?.Candidato?.Nombres</div></div>
+                                <div class="info-item"><div class="info-label"><i class="bi bi-card-text"></i> Apellidos</div><div class="info-value">@Model?.Candidato?.Apellidos</div></div>
+                                <div class="info-item"><div class="info-label"><i class="bi bi-123"></i> Edad</div><div class="info-value">@Model?.Candidato?.Edad</div></div>
+                                <div class="info-item"><div class="info-label"><i class="bi bi-upc-scan"></i> DPI</div><div class="info-value">@Model?.Candidato?.DPI</div></div>
+                                <div class="info-item"><div class="info-label"><i class="bi bi-geo"></i> DPI extendido en</div><div class="info-value">@Model?.Candidato?.DPIExtendidoEn</div></div>
+                                <div class="info-item"><div class="info-label"><i class="bi bi-geo-alt"></i> Lugar de nacimiento</div><div class="info-value">@Model?.Candidato?.LugarNacimiento</div></div>
+                                <div class="info-item"><div class="info-label"><i class="bi bi-calendar2"></i> Fecha de nacimiento</div><div class="info-value">@Model?.Candidato?.FechaNacimiento?.ToString("dd/MM/yyyy")</div></div>
+                                <div class="info-item" style="grid-column:1/-1"><div class="info-label"><i class="bi bi-house-door"></i> Dirección</div><div class="info-value">@Model?.Candidato?.Direccion</div></div>
+                                <div class="info-item"><div class="info-label"><i class="bi bi-flag"></i> Nacionalidad</div><div class="info-value">@Model?.Candidato?.Nacionalidad</div></div>
+                                <div class="info-item"><div class="info-label"><i class="bi bi-heart"></i> Estado civil</div><div class="info-value">@Model?.Candidato?.EstadoCivil</div></div>
+                                <div class="info-item"><div class="info-label"><i class="bi bi-droplet"></i> Tipo de sangre</div><div class="info-value">@Model?.Candidato?.TipoSangre</div></div>
+                            </div>
+                        </section>
+
+                        <!-- CONTACTO -->
+                        <section class="info-section">
+                            <div class="section-header"><h3 class="section-title"><i class="bi bi-telephone-fill"></i> Información de Contacto</h3></div>
+                            <div class="info-grid">
+                                <div class="info-item"><div class="info-label"><i class="bi bi-telephone"></i> Teléfono casa</div><div class="info-value"><a class="phone-link" href="tel:@Model?.Candidato?.TelefonoCasa">@Model?.Candidato?.TelefonoCasa</a></div></div>
+                                <div class="info-item"><div class="info-label"><i class="bi bi-phone"></i> Celular</div><div class="info-value"><a class="phone-link" href="tel:@Model?.Candidato?.TelefonoCelular">@Model?.Candidato?.TelefonoCelular</a></div></div>
+                                <div class="info-item"><div class="info-label"><i class="bi bi-envelope"></i> Correo</div><div class="info-value"><a class="email-link" href="mailto:@Model?.Candidato?.Correo">@Model?.Candidato?.Correo</a></div></div>
+                                <div class="info-item" style="grid-column:1/-1"><div class="info-label"><i class="bi bi-person-lines-fill"></i> Contacto de emergencia</div><div class="info-value">@Model?.Candidato?.ContactoEmergencia — @Model?.Candidato?.TelefonoEmergencia</div></div>
+                            </div>
+                        </section>
+
+                        <!-- INFORMACIÓN LABORAL -->
+                        <section class="info-section" id="educacion">
+                            <div class="section-header"><h3 class="section-title"><i class="bi bi-briefcase-fill"></i> Información Laboral</h3></div>
+                            <div class="info-grid">
+                                <div class="info-item"><div class="info-label"><i class="bi bi-person-workspace"></i> Profesión</div><div class="info-value">@Model?.Candidato?.Profesion</div></div>
+                                <div class="info-item"><div class="info-label"><i class="bi bi-clipboard-check"></i> Plaza a la que aplica</div><div class="info-value">@Model?.Candidato?.PlazaAplica</div></div>
+                            </div>
+                        </section>
+
+                        <!-- INFORMACIÓN ADICIONAL -->
+                        <section class="info-section">
+                            <div class="section-header"><h3 class="section-title"><i class="bi bi-info-circle-fill"></i> Información Adicional</h3></div>
+                            <div class="info-grid">
+                                <div class="info-item"><div class="info-label"><i class="bi bi-credit-card-2-front"></i> NIT</div><div class="info-value">@Model?.Candidato?.Nit</div></div>
+                                <div class="info-item"><div class="info-label"><i class="bi bi-hospital"></i> Número IGSS</div><div class="info-value">@Model?.Candidato?.NumIGSS</div></div>
+                                <div class="info-item"><div class="info-label"><i class="bi bi-people"></i> Dependientes económicos</div><div class="info-value">@Model?.Candidato?.DependientesEconomicos</div></div>
+                                <div class="info-item"><div class="info-label"><i class="bi bi-graph-up"></i> Experiencias poligráficas</div><div class="info-value">@Model?.Candidato?.ExperienciasPoligraficas</div></div>
+                                <div class="info-item"><div class="info-label"><i class="bi bi-clipboard2-check"></i> Resultado polígrafo previo</div><div class="info-value">@Model?.Candidato?.ResultadoPoligrafoPrevio</div></div>
+                                <div class="info-item"><div class="info-label"><i class="bi bi-translate"></i> Porcentaje de inglés</div><div class="info-value">@Model?.Candidato?.PorcentajeIngles%</div></div>
+                                <div class="info-item" style="grid-column:1/-1"><div class="info-label"><i class="bi bi-at"></i> Usuarios de redes</div><div class="info-value">@Model?.Candidato?.UsuariosRedes</div></div>
+                            </div>
+                        </section>
+
+                        <!-- CÓNYUGE -->
+                        @if (!string.IsNullOrEmpty(Model?.Candidato?.ConyugeNombre))
+                        {
+                            <section class="info-section" id="familia">
+                                <div class="section-header"><h3 class="section-title"><i class="bi bi-heart-fill"></i> Información del Cónyuge</h3></div>
+                                <div class="info-grid">
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-person"></i> Nombre</div><div class="info-value">@Model!.Candidato!.ConyugeNombre</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-calendar3"></i> Edad</div><div class="info-value">@Model.Candidato.ConyugeEdad años</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-upc-scan"></i> DPI</div><div class="info-value">@Model.Candidato.ConyugeDPI</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-phone"></i> Celular</div><div class="info-value">@Model.Candidato.ConyugeCel</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-heart"></i> Estado civil</div><div class="info-value">@Model.Candidato.ConyugeEstadoCivil</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-briefcase"></i> Ocupación</div><div class="info-value">@Model.Candidato.ConyugeOcupacion</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-building"></i> Lugar de trabajo</div><div class="info-value">@Model.Candidato.ConyugeTrabajo</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-telephone"></i> Teléfono trabajo</div><div class="info-value">@Model.Candidato.ConyugeTelTrabajo</div></div>
+                                </div>
+                            </section>
+                        }
+
+                        <!-- INFORMACIÓN DE PADRES -->
+                        @if (Model?.Padres != null)
+                        {
+                            <section class="info-section" id="padres">
+                                <div class="section-header"><h3 class="section-title"><i class="bi bi-people-fill"></i> Información de los Padres</h3></div>
+                                <div class="row">
+                                    <!-- Información del Padre -->
+                                    <div class="col-md-6">
+                                        <h5 class="mb-3"><i class="bi bi-person"></i> Padre</h5>
+                                        <div class="info-grid">
+                                            <div class="info-item"><div class="info-label"><i class="bi bi-person"></i> Nombre</div><div class="info-value">@Model!.Padres!.NombrePadre</div></div>
+                                            <div class="info-item"><div class="info-label"><i class="bi bi-calendar3"></i> Edad</div><div class="info-value">@Model.Padres.EdadPadre años</div></div>
+                                            <div class="info-item"><div class="info-label"><i class="bi bi-upc-scan"></i> DPI</div><div class="info-value">@Model.Padres.DPIPadre</div></div>
+                                            <div class="info-item"><div class="info-label"><i class="bi bi-card-text"></i> No. Residencia</div><div class="info-value">@Model.Padres.NumResidenciaP</div></div>
+                                            <div class="info-item"><div class="info-label"><i class="bi bi-heart"></i> Estado civil</div><div class="info-value">@Model.Padres.EstadoCivilP</div></div>
+                                            <div class="info-item"><div class="info-label"><i class="bi bi-phone"></i> Celular</div><div class="info-value">@Model.Padres.CelularP</div></div>
+                                            <div class="info-item"><div class="info-label"><i class="bi bi-briefcase"></i> Profesión</div><div class="info-value">@Model.Padres.ProfesionP</div></div>
+                                            <div class="info-item"><div class="info-label"><i class="bi bi-flag"></i> Nacionalidad</div><div class="info-value">@Model.Padres.NacionalidadP</div></div>
+                                            <div class="info-item"><div class="info-label"><i class="bi bi-building"></i> Lugar de trabajo</div><div class="info-value">@Model.Padres.LugarTrabajoP</div></div>
+                                        </div>
+                                    </div>
+                                    <!-- Información de la Madre -->
+                                    <div class="col-md-6">
+                                        <h5 class="mb-3"><i class="bi bi-person"></i> Madre</h5>
+                                        <div class="info-grid">
+                                            <div class="info-item"><div class="info-label"><i class="bi bi-person"></i> Nombre</div><div class="info-value">@Model.Padres.NombreMadre</div></div>
+                                            <div class="info-item"><div class="info-label"><i class="bi bi-calendar3"></i> Edad</div><div class="info-value">@Model.Padres.EdadMadre años</div></div>
+                                            <div class="info-item"><div class="info-label"><i class="bi bi-upc-scan"></i> DPI</div><div class="info-value">@Model.Padres.DPIMadre</div></div>
+                                            <div class="info-item"><div class="info-label"><i class="bi bi-card-text"></i> No. Residencia</div><div class="info-value">@Model.Padres.NumResidenciaM</div></div>
+                                            <div class="info-item"><div class="info-label"><i class="bi bi-heart"></i> Estado civil</div><div class="info-value">@Model.Padres.EstadoCivilM</div></div>
+                                            <div class="info-item"><div class="info-label"><i class="bi bi-phone"></i> Celular</div><div class="info-value">@Model.Padres.CelularM</div></div>
+                                            <div class="info-item"><div class="info-label"><i class="bi bi-briefcase"></i> Profesión</div><div class="info-value">@Model.Padres.ProfesionM</div></div>
+                                            <div class="info-item"><div class="info-label"><i class="bi bi-flag"></i> Nacionalidad</div><div class="info-value">@Model.Padres.NacionalidadM</div></div>
+                                            <div class="info-item"><div class="info-label"><i class="bi bi-building"></i> Lugar de trabajo</div><div class="info-value">@Model.Padres.LugarTrabajoM</div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        }
+
+                        <!-- TABLAS (Hermanos, Hijos, Deudas, Gastos/Ingresos, Tarjetas, Estudios, Historial) -->
+                        @if (Model?.Hermanos?.Count > 0)
+                        {
+                            <section class="info-section">
+                                <div class="section-header"><h3 class="section-title"><i class="bi bi-people-fill"></i> Hermanos</h3></div>
+                                <div class="table-responsive">
+                                    <table class="table table-striped align-middle">
+                                        <thead><tr><th>Nombre</th><th>Edad</th><th>DPI</th><th>Celular</th><th>Profesión</th></tr></thead>
+                                <tbody>
+                                    @foreach (var h in Model!.Hermanos)
+                                    {
+                                        <tr><td>@h.Nombre</td><td>@h.Edad</td><td>@h.DPI</td><td>@h.Celular</td><td>@h.Profesion</td></tr>
+                                    }
+                                </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        }
+
+                        @if (Model?.Hijos?.Count > 0)
+                        {
+                            <section class="info-section">
+                                <div class="section-header"><h3 class="section-title"><i class="bi bi-person-hearts"></i> Hijos</h3></div>
+                                <div class="table-responsive">
+                                    <table class="table table-striped align-middle">
+                                        <thead><tr><th>Nombre</th><th>Edad</th><th>Dirección</th><th>Ocupación</th></tr></thead>
+                                <tbody>
+                                    @foreach (var x in Model!.Hijos)
+                                    {
+                                        <tr><td>@x.NombreHijo</td><td>@x.EdadHijo</td><td>@x.Direccion</td><td>@x.Ocupacion</td></tr>
+                                    }
+                                </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        }
+
+                        @if (Model?.Deudas?.Count > 0)
+                        {
+                            <section class="info-section" id="economia">
+                                <div class="section-header"><h3 class="section-title"><i class="bi bi-credit-card-2-back"></i> Deudas</h3></div>
+                                <div class="table-responsive">
+                                    <table class="table table-striped align-middle">
+                                        <thead><tr><th>Banco</th><th>Monto Mensual</th><th>Razón</th></tr></thead>
+                                <tbody>
+                                    @foreach (var d in Model!.Deudas)
+                                    {
+                                        <tr><td>@d.Banco</td><td>Q @d.MontoMensual?.ToString("N2")</td><td>@d.Razon</td></tr>
+                                    }
+                                </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        }
+
+                        @if (Model?.GastosMensuales?.Count > 0)
+                        {
+                            <section class="info-section">
+                                <div class="section-header"><h3 class="section-title"><i class="bi bi-wallet2"></i> Gastos e Ingresos Mensuales</h3></div>
+                                <div class="table-responsive">
+                                    <table class="table table-striped align-middle">
+                                        <thead><tr><th>Concepto</th><th>Tipo</th><th>Monto</th></tr></thead>
+                                <tbody>
+                                    @foreach (var g in Model!.GastosMensuales)
+                                    {
+                                        <tr>
+                                            <td>@g.NombreConcepto</td>
+                                            <td>@(g.EsIngreso ? Html.Raw("<span class='badge bg-success'>Ingreso</span>") : Html.Raw("<span class='badge bg-warning'>Gasto</span>"))</td>
+                                            <td>Q @g.Monto.ToString("N2")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        }
+
+                        @if (Model?.TarjetasCredito?.Count > 0)
+                        {
+                            <section class="info-section">
+                                <div class="section-header"><h3 class="section-title"><i class="bi bi-credit-card"></i> Tarjetas de Crédito</h3></div>
+                                <div class="table-responsive">
+                                    <table class="table table-striped align-middle">
+                                        <thead><tr><th>Banco</th><th>Límite de Crédito</th><th>Saldo Actual</th></tr></thead>
+                                <tbody>
+                                    @foreach (var t in Model!.TarjetasCredito)
+                                    {
+                                        <tr><td>@t.Banco</td><td>Q @t.LimiteCredito?.ToString("N2")</td><td>Q @t.SaldoActual?.ToString("N2")</td></tr>
+                                    }
+                                </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        }
+
+                        @if (Model?.Estudios?.Count > 0)
+                        {
+                            <section class="info-section">
+                                <div class="section-header"><h3 class="section-title"><i class="bi bi-mortarboard"></i> Estudios Realizados</h3></div>
+                                <div class="table-responsive">
+                                    <table class="table table-striped align-middle">
+                                        <thead><tr><th>Institución</th><th>Estudios</th><th>Lugar</th><th>Período</th><th>Último Grado</th></tr></thead>
+                                <tbody>
+                                    @foreach (var e in Model!.Estudios)
+                                    {
+                                        <tr><td>@e.NombreInstitucion</td><td>@e.EstudiosRealizados</td><td>@e.Lugar</td><td>@e.FechaDesde?.ToString("MM/yyyy") - @e.FechaHasta?.ToString("MM/yyyy")</td><td>@e.UltimoGrado</td></tr>
+                                    }
+                                </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        }
+
+                        @if (Model?.HistorialLaboral?.Count > 0)
+                        {
+                            <section class="info-section">
+                                <div class="section-header"><h3 class="section-title"><i class="bi bi-briefcase"></i> Historial Laboral</h3></div>
+                                <div>
+                                    @foreach (var tr in Model!.HistorialLaboral)
+                            {
+                                <div class="border-bottom pb-3 mb-3">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p><strong>Empresa:</strong> @tr.Empresa</p>
+                                            <p><strong>Cargo:</strong> @tr.Cargo</p>
+                                            <p><strong>Teléfono:</strong> @tr.TelefonoEmpresa</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><strong>Período:</strong> @tr.FechaIngreso?.ToString("MM/yyyy") - @tr.FechaEgreso?.ToString("MM/yyyy")</p>
+                                            <p><strong>Último Salario:</strong> Q @tr.UltimoSalario?.ToString("N2")</p>
+                                            <p><strong>Causa de Retiro:</strong> @tr.CausaRetiro</p>
+                                        </div>
+                                        @if (!string.IsNullOrEmpty(tr.JefeInmediato))
+                                        {
+                                            <div class="col-12 mt-2"><p><strong>Jefe Inmediato:</strong> @tr.JefeInmediato (@tr.CargoJefe) - Tel: @tr.TelefonoJefe</p></div>
+                                        }
+                                        @if (!string.IsNullOrEmpty(tr.Observaciones))
+                                        {
+                                            <div class="col-12"><p><strong>Observaciones:</strong> @tr.Observaciones</p></div>
+                                        }
+                                    </div>
+                                </div>
+                                    }
+                                </div>
+                            </section>
+                        }
+
+                        <!-- SEPARADOR VISUAL -->
+                        <hr class="my-5" style="border-top: 3px solid #dee2e6;">
+                        <div class="text-center mb-4">
+                            <h2 class="text-primary"><i class="bi bi-heart-pulse"></i> Aspectos Emocionales y Salud</h2>
+                        </div>
+
+                        <!-- ASPECTOS EMOCIONALES -->
+                        <section class="info-section" id="aspectos">
+                                <div class="section-header"><h3 class="section-title"><i class="bi bi-heart"></i> Aspectos Emocionales</h3></div>
+                                @if (Model?.AspectosEmocionales != null)
+                                {
+                                <div class="info-grid">
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-people"></i> ¿Viven sus padres?</div><div class="info-value">@(Model!.AspectosEmocionales!.VivenPadres ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-chat-dots"></i> Relación entre padres</div><div class="info-value">@Model.AspectosEmocionales.RelacionEntrePadres</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-house"></i> ¿Con quién vive?</div><div class="info-value">@Model.AspectosEmocionales.ConQuienVive</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-emoji-frown"></i> Intentos de suicidio</div><div class="info-value">@Model.AspectosEmocionales.IntentosSuicidio</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-award"></i> Cualidad que respeta</div><div class="info-value">@Model.AspectosEmocionales.CualidadRespeta</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-x-octagon"></i> Defecto intolerable</div><div class="info-value">@Model.AspectosEmocionales.DefectoIntolerable</div></div>
+                                    <div class="info-item" style="grid-column:1/-1"><div class="info-label"><i class="bi bi-hand-thumbs-up"></i> Mejor experiencia</div><div class="info-value">@Model.AspectosEmocionales.MejorExperiencia</div></div>
+                                    <div class="info-item" style="grid-column:1/-1"><div class="info-label"><i class="bi bi-hand-thumbs-down"></i> Peor experiencia</div><div class="info-value">@Model.AspectosEmocionales.PeorExperiencia</div></div>
+                                </div>
+                                }
+                                else
+                                {
+                                    <p class="text-muted text-center py-3"><i class="bi bi-info-circle"></i> No hay información disponible</p>
+                                }
+                        </section>
+
+                        <!-- SALUD: HISTORIA MÉDICA -->
+                        <section class="info-section" id="salud">
+                                <div class="section-header"><h3 class="section-title"><i class="bi bi-heart-pulse"></i> Historia Médica</h3></div>
+                                @if (Model?.HistoriaMedica != null)
+                                {
+                                <div class="info-grid">
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-activity"></i> Condición general</div><div class="info-value">@Model!.HistoriaMedica!.CondicionGeneral</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-thermometer"></i> Malestar actual</div><div class="info-value">@Model.HistoriaMedica.MalestarActual</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-clock"></i> Hora última comida</div><div class="info-value">@Model.HistoriaMedica.HoraUltimaComida</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-moon"></i> Horas dormidas ayer</div><div class="info-value">@Model.HistoriaMedica.HorasDormidasAyer</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-gender-female"></i> Embarazo</div><div class="info-value">@(Model.HistoriaMedica.Embarazo ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-shield-plus"></i> Enfermedad grave</div><div class="info-value">@Model.HistoriaMedica.EnfermedadGrave</div></div>
+                                </div>
+                                }
+                                else
+                                {
+                                    <p class="text-muted text-center py-3"><i class="bi bi-info-circle"></i> No hay información disponible</p>
+                                }
+                        </section>
+
+                        <!-- HÁBITOS DE ALCOHOL -->
+                        <section class="info-section">
+                                <div class="section-header"><h3 class="section-title"><i class="bi bi-cup-straw"></i> Hábitos de Alcohol</h3></div>
+                                @if (Model?.HabitosAlcohol != null)
+                                {
+                                <div class="info-grid">
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-clock"></i> Última vez que bebió</div><div class="info-value">@Model!.HabitosAlcohol!.UltimaVezBebio</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-calendar-range"></i> Promedio mensual</div><div class="info-value">@Model.HabitosAlcohol.PromedioMensual</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-exclamation-circle"></i> Excesos por año</div><div class="info-value">@Model.HabitosAlcohol.ExcesosPorAnio</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-emoji-dizzy"></i> Cómo es cuando excede</div><div class="info-value">@Model.HabitosAlcohol.ComoEsCuandoExcede</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-question-circle"></i> Última amnesia</div><div class="info-value">@Model.HabitosAlcohol.UltimaAmnesia</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-car-front"></i> Última conducción ebrio</div><div class="info-value">@Model.HabitosAlcohol.UltimaConduccionEbrio</div></div>
+                                    <div class="info-item" style="grid-column:1/-1"><div class="info-label"><i class="bi bi-exclamation-triangle"></i> Peor evento</div><div class="info-value">@Model.HabitosAlcohol.PeorEvento</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-people"></i> Pelea al beber</div><div class="info-value">@(Model.HabitosAlcohol.PeleaAlBeber ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-shield-exclamation"></i> Detenido al beber</div><div class="info-value">@(Model.HabitosAlcohol.DetenidoAlBeber ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-hospital"></i> Tratamiento control beber</div><div class="info-value">@(Model.HabitosAlcohol.TratamientoControlBeber ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-briefcase"></i> Laboró ebrio/resaca</div><div class="info-value">@(Model.HabitosAlcohol.LaboroEbrioResaca ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-calendar-x"></i> Faltó por beber</div><div class="info-value">@(Model.HabitosAlcohol.FaltoPorBeber ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-clock-history"></i> Bebió en horas de trabajo</div><div class="info-value">@(Model.HabitosAlcohol.BebioEnHorasTrabajo ? "Sí" : "No")</div></div>
+                                </div>
+                                }
+                                else
+                                {
+                                    <p class="text-muted text-center py-3"><i class="bi bi-info-circle"></i> No hay información disponible</p>
+                                }
+                        </section>
+
+                        <!-- USO DE MEDICAMENTOS -->
+                        <section class="info-section">
+                                <div class="section-header"><h3 class="section-title"><i class="bi bi-capsule"></i> Uso de Medicamentos</h3></div>
+                                @if (Model?.UsoMedicamentos != null)
+                                {
+                                <div class="info-grid">
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-cup-straw"></i> Alcohol 24h</div><div class="info-value">@(Model!.UsoMedicamentos!.IngestaAlcohol24h ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-exclamation-triangle"></i> Droga 30 días</div><div class="info-value">@(Model.UsoMedicamentos.Droga30dias ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-person-plus"></i> Trat. médico reciente</div><div class="info-value">@(Model.UsoMedicamentos.TratMedicoReciente ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-capsule"></i> Consume medicamentos</div><div class="info-value">@(Model.UsoMedicamentos.ConsumeMedicamentos ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-clipboard2-check"></i> Doping practicado</div><div class="info-value">@(Model.UsoMedicamentos.DopingPracticado ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-clipboard2-x"></i> Doping alterado</div><div class="info-value">@(Model.UsoMedicamentos.DopingAlterado ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-bandaid"></i> Cirugía</div><div class="info-value">@(Model.UsoMedicamentos.Cirugia ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-emoji-dizzy"></i> Alergia medicamento</div><div class="info-value">@(Model.UsoMedicamentos.AlergiaMedicamento ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-emoji-dizzy"></i> Alergia comida</div><div class="info-value">@(Model.UsoMedicamentos.AlergiaComida ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-eyeglasses"></i> Usa lentes</div><div class="info-value">@(Model.UsoMedicamentos.UsaLentes ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-calendar-event"></i> Últ. chequeo médico</div><div class="info-value">@Model.UsoMedicamentos.UltimoChequeoMedico</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-tooth"></i> Últ. chequeo odonto</div><div class="info-value">@Model.UsoMedicamentos.UltimoChequeoOdonto</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-eye"></i> Últ. chequeo oftalmo</div><div class="info-value">@Model.UsoMedicamentos.UltimoChequeoOftalmo</div></div>
+                            @if (!string.IsNullOrEmpty(Model.UsoMedicamentos.Observaciones))
+                            {
+                                <div class="info-item" style="grid-column:1/-1">
+                                    <div class="info-label"><i class="bi bi-card-text"></i> Observaciones</div>
+                                    <div class="info-value">@Model.UsoMedicamentos.Observaciones</div>
+                                </div>
+                            }
+                            </div>
+                                }
+                                else
+                                {
+                                    <p class="text-muted text-center py-3"><i class="bi bi-info-circle"></i> No hay información disponible</p>
+                                }
+                        </section>
+
+                        <!-- DROGAS -->
+                        <section class="info-section">
+                                <div class="section-header"><h3 class="section-title"><i class="bi bi-exclamation-triangle"></i> Consumo de Drogas</h3></div>
+                                @if (Model?.Drogas != null)
+                                {
+                                <div class="info-grid">
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-clock"></i> Última vez consumo</div><div class="info-value">@Model!.Drogas!.UltimaVezConsumo</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-check2-square"></i> Probó drogas</div><div class="info-value">@(Model.Drogas.ProboDrogas ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-people"></i> Cualquier contacto</div><div class="info-value">@(Model.Drogas.CualquierContacto ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-box-seam"></i> Guardó droga ajena</div><div class="info-value">@(Model.Drogas.GuardoDrogaAjena ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-person-arms-up"></i> Contacto con vendedores</div><div class="info-value">@(Model.Drogas.ContactoConVendedores ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-people-fill"></i> Familiar consume</div><div class="info-value">@(Model.Drogas.FamiliarConsume ? "Sí" : "No")</div></div>
+                                </div>
+                                }
+                                else
+                                {
+                                    <p class="text-muted text-center py-3"><i class="bi bi-info-circle"></i> No hay información disponible</p>
+                                }
+                        </section>
+
+                        <!-- ANTECEDENTES GENERALES -->
+                        <section class="info-section" id="legal">
+                                <div class="section-header"><h3 class="section-title"><i class="bi bi-shield-exclamation"></i> Antecedentes Generales</h3></div>
+                                @if (Model?.AntecedentesGenerales != null)
+                                {
+                                <div class="info-grid">
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-emoji-dizzy"></i> Causó heridas graves</div><div class="info-value">@(Model!.AntecedentesGenerales!.CausoHeridasGraves ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-emoji-dizzy"></i> Mató alguien</div><div class="info-value">@(Model.AntecedentesGenerales.MatoAlguien ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-crosshair"></i> Última riña</div><div class="info-value">@Model.AntecedentesGenerales.UltimaRina</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-activity"></i> Última pérdida de control</div><div class="info-value">@Model.AntecedentesGenerales.UltimaPerdidaControl</div></div>
+                                </div>
+                                }
+                                else
+                                {
+                                    <p class="text-muted text-center py-3"><i class="bi bi-info-circle"></i> No hay información disponible</p>
+                                }
+                        </section>
+
+                        <!-- MANEJO DE ARMAS -->
+                        <section class="info-section">
+                                <div class="section-header"><h3 class="section-title"><i class="bi bi-crosshair"></i> Manejo de Armas</h3></div>
+                                @if (Model?.ManejoArmas != null)
+                                {
+                                <div class="info-grid">
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-shield"></i> Tiene armas propias</div><div class="info-value">@(Model!.ManejoArmas!.TieneArmasPropias ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-person-check"></i> Ha portado arma</div><div class="info-value">@(Model.ManejoArmas.HaPortadoArma ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-exclamation-diamond"></i> Enfrentamiento con arma</div><div class="info-value">@(Model.ManejoArmas.EnfrentamientoConArma ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-bullseye"></i> Disparo innecesario</div><div class="info-value">@(Model.ManejoArmas.DisparoInnecesario ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-slash-circle"></i> Uso indebido arma</div><div class="info-value">@(Model.ManejoArmas.UsoIndebidoArma ? "Sí" : "No")</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-bag-x"></i> Compra/venta ilegal armas</div><div class="info-value">@(Model.ManejoArmas.CompraVentaIlegalArmas ? "Sí" : "No")</div></div>
+                                </div>
+                                }
+                                else
+                                {
+                                    <p class="text-muted text-center py-3"><i class="bi bi-info-circle"></i> No hay información disponible</p>
+                                }
+                        </section>
+
+                        <!-- CONCLUSIONES -->
+                        <section class="info-section">
+                                <div class="section-header"><h3 class="section-title"><i class="bi bi-check-circle"></i> Conclusiones</h3></div>
+                                @if (Model?.Conclusiones != null)
+                                {
+                                <div class="info-grid">
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-flag"></i> Experiencia chantajeable</div><div class="info-value">@BoolToNA(Model!.Conclusiones!.ExperienciaChantajeable)</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-question-circle"></i> Pensaba preguntas faltantes</div><div class="info-value">@BoolToNA(Model.Conclusiones.PensabaPreguntasFaltantes)</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-slash-circle"></i> Falseo u omisiones</div><div class="info-value">@BoolToNA(Model.Conclusiones.FalseoOmisiones)</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-exclamation-octagon"></i> Algo que preocupe</div><div class="info-value">@BoolToNA(Model.Conclusiones.AlgoQuePreocupe)</div></div>
+                                    <div class="info-item"><div class="info-label"><i class="bi bi-chat-right-quote"></i> Algo que decir</div><div class="info-value">@BoolToNA(Model.Conclusiones.AlgoQueDecir)</div></div>
+                                    <div class="info-item" style="grid-column:1/-1"><div class="info-label"><i class="bi bi-bullseye"></i> Objetivos Corto Plazo</div><div class="info-value">@Model.Conclusiones.ObjetivosCP</div></div>
+                                    <div class="info-item" style="grid-column:1/-1"><div class="info-label"><i class="bi bi-bullseye"></i> Objetivos Mediano Plazo</div><div class="info-value">@Model.Conclusiones.ObjetivosMP</div></div>
+                                    <div class="info-item" style="grid-column:1/-1"><div class="info-label"><i class="bi bi-bullseye"></i> Objetivos Largo Plazo</div><div class="info-value">@Model.Conclusiones.ObjetivosLP</div></div>
+                                </div>
+                                }
+                                else
+                                {
+                                    <p class="text-muted text-center py-3"><i class="bi bi-info-circle"></i> No hay información disponible</p>
+                                }
+                        </section>
+            </div>
+        </div>
+
+        <!-- Footer acciones -->
+        <div class="empleado-footer">
+            <div class="footer-actions">
+                <a asp-action="Index" class="btn-secondary"><i class="bi bi-arrow-left"></i> Volver</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    @functions {
+        // Convierte bool? a "Sí/No/N/A"
+        public static string BoolToNA(bool? v) => v == true ? "Sí" : v == false ? "No" : "N/A";
+    }
+</body>
+</html>
