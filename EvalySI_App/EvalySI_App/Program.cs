@@ -1,6 +1,8 @@
 using EvalySI_App.Data;
 using Microsoft.AspNetCore.Session;
 
+builder.WebHost.UseStaticWebAssets();
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
