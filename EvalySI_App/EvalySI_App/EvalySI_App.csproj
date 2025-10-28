@@ -7,14 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\\ActosSalud\\**" />
-    <Compile Remove="Views\\DatosGenerales\\**" />
-    <Content Remove="Views\\ActosSalud\\**" />
-    <Content Remove="Views\\DatosGenerales\\**" />
-    <EmbeddedResource Remove="Views\\ActosSalud\\**" />
-    <EmbeddedResource Remove="Views\\DatosGenerales\\**" />
-    <None Remove="Views\\ActosSalud\\**" />
-    <None Remove="Views\\DatosGenerales\\**" />
+    <Compile Remove="Views\ActosSalud\**" />
+    <Compile Remove="Views\DatosGenerales\**" />
+    <Content Remove="Views\ActosSalud\**" />
+    <Content Remove="Views\DatosGenerales\**" />
+    <EmbeddedResource Remove="Views\ActosSalud\**" />
+    <EmbeddedResource Remove="Views\DatosGenerales\**" />
+    <None Remove="Views\ActosSalud\**" />
+    <None Remove="Views\DatosGenerales\**" />
   </ItemGroup>
 
   <ItemGroup>
