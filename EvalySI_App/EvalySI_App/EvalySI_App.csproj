@@ -16,6 +16,11 @@
     <None Remove="Views\ActosSalud\**" />
     <None Remove="Views\DatosGenerales\**" />
   </ItemGroup>
+<ItemGroup>
+  <Content Include="wwwroot\**">
+    <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+  </Content>
+</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />
